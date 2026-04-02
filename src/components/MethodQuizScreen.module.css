@@ -1,0 +1,217 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: none;
+  border-radius: 20px;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.menuButton:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.progressRow {
+  text-align: center;
+}
+
+.progress {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.category {
+  font-size: 0.8rem;
+  color: var(--text-accent);
+  background: var(--bg-accent);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--text-accent);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.questionBox {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.8rem 1.5rem;
+}
+
+.question {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.inputArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1.05rem;
+  font-family: "Fira Code", "Courier New", monospace;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+
+.input:focus {
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.submitButton {
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--text-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.submitButton:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.submitButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.resultArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.judgment {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.correct {
+  color: var(--text-success);
+  background: var(--bg-success);
+}
+
+.incorrect {
+  color: var(--text-error);
+  background: var(--bg-error);
+}
+
+.answerBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--text-body);
+}
+
+.answerBox code {
+  font-family: "Fira Code", "Courier New", monospace;
+  background: var(--bg-subtle);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.supplement {
+  background: var(--bg-warning);
+  border: 1px solid var(--border-warning);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+
+.supplementLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-warning);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.supplement p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.nextButton {
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--text-primary);
+  color: var(--bg-app);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.nextButton:hover {
+  opacity: 0.8;
+}
+
+.enterHint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-very-muted);
+  margin: 0;
+}

@@ -1,0 +1,61 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-app: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-subtle: #f3f4f6;
+  --text-primary: #1a1a2e;
+  --text-body: #374151;
+  --text-muted: #6b7280;
+  --text-very-muted: #9ca3af;
+  --border: #e5e7eb;
+  --bg-accent: #eef2ff;
+  --text-accent: #6366f1;
+  --bg-warning: #fffbeb;
+  --border-warning: #fde68a;
+  --text-warning: #d97706;
+  --bg-success: #d1fae5;
+  --text-success: #059669;
+  --bg-error: #fee2e2;
+  --text-error: #dc2626;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0f0f17;
+  --bg-card: #1c1c2e;
+  --bg-subtle: #252538;
+  --text-primary: #f1f1f5;
+  --text-body: #c9d1d9;
+  --text-muted: #8b949e;
+  --text-very-muted: #6e7681;
+  --border: #30304a;
+  --bg-accent: #1e1b4b;
+  --text-accent: #818cf8;
+  --bg-warning: #2d2000;
+  --border-warning: #92400e;
+  --text-warning: #fbbf24;
+  --bg-success: #052e16;
+  --text-success: #34d399;
+  --bg-error: #2d0a0a;
+  --text-error: #f87171;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-body);
+  background: var(--bg-app);
+  transition: background 0.2s, color 0.2s;
+}
+
+#root {
+  width: 100%;
+}
+
+button {
+  font-family: inherit;
+}

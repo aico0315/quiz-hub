@@ -1,0 +1,279 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem 1.5rem;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: none;
+  border-radius: 20px;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.menuButton:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.category {
+  font-size: 0.8rem;
+  color: var(--text-accent);
+  background: var(--bg-accent);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.progressRow {
+  text-align: center;
+}
+
+.progress {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--text-accent);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.questionBox {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.7;
+}
+
+.editorArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.editorLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.editor {
+  width: 100%;
+  padding: 1rem;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.editor:focus {
+  border-color: var(--text-accent);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.runButton {
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--text-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.runButton:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.runButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.errorBox {
+  background: var(--bg-error);
+  border: 1px solid var(--text-error);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+}
+
+.errorLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-error);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.errorBox pre {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-error);
+  white-space: pre-wrap;
+  font-family: "Fira Code", "Courier New", monospace;
+}
+
+.resultArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.judgment {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.correct {
+  color: var(--text-success);
+  background: var(--bg-success);
+}
+
+.incorrect {
+  color: var(--text-error);
+  background: var(--bg-error);
+}
+
+.outputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.outputRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.outputLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.outputBox code {
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.explanation {
+  background: var(--bg-warning);
+  border: 1px solid var(--border-warning);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+
+.explanationLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-warning);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.explanationBody {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.codeBlock {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+
+.codeBlock code {
+  font-family: "Fira Code", "Courier New", monospace;
+}
+
+.nextButton {
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--text-primary);
+  color: var(--bg-app);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.nextButton:hover {
+  opacity: 0.8;
+}
