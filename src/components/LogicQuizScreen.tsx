@@ -32,7 +32,8 @@ export default function LogicQuizScreen({ question, questionNumber, totalQuestio
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    setCode(question.starterCode);
+    const saved = localStorage.getItem(`quiz-hub-code-${question.id}`);
+    setCode(saved ?? question.starterCode);
     setSubmitted(false);
     setActualOutput([]);
     setRunError(null);
@@ -95,7 +96,10 @@ export default function LogicQuizScreen({ question, questionNumber, totalQuestio
           ref={textareaRef}
           className={styles.editor}
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={(e) => {
+            setCode(e.target.value);
+            localStorage.setItem(`quiz-hub-code-${question.id}`, e.target.value);
+          }}
           onKeyDown={handleKeyDown}
           spellCheck={false}
           autoComplete="off"

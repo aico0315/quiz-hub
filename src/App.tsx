@@ -10,6 +10,8 @@ import LogicQuizScreen from "./components/LogicQuizScreen";
 import ClearScreen from "./components/ClearScreen";
 import styles from "./App.module.css";
 
+const SESSION_KEY = "quiz-hub-session";
+
 function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -19,20 +21,69 @@ function shuffle<T>(arr: T[]): T[] {
   return copy;
 }
 
+function loadSession() {
+  try {
+    return JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+  } catch {
+    return null;
+  }
+}
+
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
 export default function App() {
-  const [screen, setScreen] = useState<Screen>("dashboard");
-  const [quizType, setQuizType] = useState<QuizType>("method");
-  const [level, setLevel] = useState<Level>("junior");
-  const [methodQs, setMethodQs] = useState<MethodQuestion[]>([]);
-  const [logicQs, setLogicQs] = useState<LogicQuestion[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [screen, setScreen] = useState<Screen>(() => {
+    const s = loadSession();
+    return s?.screen === "quiz" ? "quiz" : "dashboard";
+  });
+  const [quizType, setQuizType] = useState<QuizType>(() => loadSession()?.quizType ?? "method");
+  const [level, setLevel] = useState<Level>(() => loadSession()?.level ?? "junior");
+  const [currentIndex, setCurrentIndex] = useState<number>(() => loadSession()?.currentIndex ?? 0);
+  const [correctCount, setCorrectCount] = useState<number>(() => loadSession()?.correctCount ?? 0);
+
+  const [methodQs, setMethodQs] = useState<MethodQuestion[]>(() => {
+    const s = loadSession();
+    if (s?.screen !== "quiz" || !s?.methodQIds) return [];
+    const pool = s.quizType === "webapi" ? webApiQuestions : methodQuestions;
+    return s.methodQIds
+      .map((id: string) => pool.find((q) => q.id === id))
+      .filter(Boolean) as MethodQuestion[];
+  });
+
+  const [logicQs, setLogicQs] = useState<LogicQuestion[]>(() => {
+    const s = loadSession();
+    if (s?.screen !== "quiz" || !s?.logicQIds) return [];
+    return s.logicQIds
+      .map((id: string) => logicQuestions.find((q) => q.id === id))
+      .filter(Boolean) as LogicQuestion[];
+  });
+
   const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
 
+  // ダークモード
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
+
+  // クイズ中のセッションを保存
+  useEffect(() => {
+    if (screen !== "quiz") return;
+    localStorage.setItem(
+      SESSION_KEY,
+      JSON.stringify({
+        screen,
+        quizType,
+        level,
+        currentIndex,
+        correctCount,
+        methodQIds: methodQs.map((q) => q.id),
+        logicQIds: logicQs.map((q) => q.id),
+      })
+    );
+  }, [screen, quizType, level, currentIndex, correctCount, methodQs, logicQs]);
 
   const handleSelectType = useCallback((type: QuizType) => {
     setQuizType(type);
@@ -58,6 +109,7 @@ export default function App() {
     const nextIndex = currentIndex + 1;
     if (nextIndex >= total) {
       setCorrectCount(nextCorrect);
+      clearSession();
       setScreen("clear");
     } else {
       setCorrectCount(nextCorrect);
@@ -66,10 +118,15 @@ export default function App() {
   }, [correctCount, currentIndex, quizType, logicQs.length, methodQs.length]);
 
   const handleRetry = useCallback(() => {
+    clearSession();
     handleSelectLevel(level);
   }, [handleSelectLevel, level]);
 
-  const handleDashboard = useCallback(() => setScreen("dashboard"), []);
+  const handleDashboard = useCallback(() => {
+    clearSession();
+    setScreen("dashboard");
+  }, []);
+
   const handleBackToLevel = useCallback(() => setScreen("level"), []);
 
   const totalCount = quizType === "logic" ? logicQs.length : methodQs.length;
