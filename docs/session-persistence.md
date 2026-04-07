@@ -114,30 +114,48 @@ const [logicQs, setLogicQs] = useState<LogicQuestion[]>(() => {
 
 ### セッションのクリア
 
-以下のタイミングでセッションを削除します。
+以下のタイミングでセッションとエディタコードをまとめて削除します。
 
 ```tsx
 function clearSession() {
+  // セッション本体を削除
   localStorage.removeItem(SESSION_KEY);
+  // 保存済みのエディタコードを全て削除
+  Object.keys(localStorage)
+    .filter((key) => key.startsWith("quiz-hub-code-"))
+    .forEach((key) => localStorage.removeItem(key));
 }
+```
 
-// 全問終了時
+`Object.keys(localStorage)` で localStorage に保存されている全キーを配列で取得し、
+`quiz-hub-code-` で始まるものだけを絞り込んでまとめて削除しています。
+
+クリアのタイミングは以下の4つです：
+
+```tsx
+// 1. レベル選択でセッション開始するとき（古いコードをリセット）
+const handleSelectLevel = useCallback((selectedLevel: Level) => {
+  clearSession();
+  // ... 問題のシャッフルなど
+}, []);
+
+// 2. 全問終了時
 const handleNext = useCallback((isCorrect: boolean) => {
   if (nextIndex >= total) {
-    clearSession();   // ← クリア画面に移る前に削除
+    clearSession();
     setScreen("clear");
   }
 }, [...]);
 
-// ダッシュボードへ戻るとき
+// 3. ダッシュボードへ戻るとき
 const handleDashboard = useCallback(() => {
   clearSession();
   setScreen("dashboard");
 }, []);
 
-// もう一度挑戦するとき
+// 4. もう一度挑戦するとき
 const handleRetry = useCallback(() => {
-  clearSession();    // ← 古いセッションを消してから再シャッフル
+  clearSession();
   handleSelectLevel(level);
 }, [...]);
 ```
@@ -183,10 +201,22 @@ onChange={(e) => {
 ## セッションのライフサイクルまとめ
 
 ```
-レベル選択 → 問題開始
-    ↓ localStorage に保存開始
-問題を解く（コードを書く・別画面へ・リロード）
-    ↓ 復元して同じ問題から再開
-全問終了 または ダッシュボードへ戻る
+レベル選択
+    ↓ 古いセッション・コードをクリア → 新しいセッション開始
+問題を解く（コードを書く）
+    ↓ localStorage に自動保存
+途中でメールなど別アプリへ → 戻る
+    ↓ 同じ問題・書きかけのコードを復元
+全問終了 / ダッシュボードへ戻る / もう一度挑戦
     ↓ localStorage をクリア
 ```
+
+## なぜ「セッション開始時」にもクリアが必要だったか
+
+最初の実装ではセッション終了時（全問終了・ダッシュボードへ戻る・もう一度挑戦）にしかクリアしていませんでした。
+
+しかし、過去に途中で終了したセッションのコードが `localStorage` に残り続けるため、
+**新しく問題を始めたのに以前書きかけたコードが出てきてしまう**という問題が発生しました。
+
+レベル選択のタイミング（= 新しいセッションの開始）でもクリアすることで、
+常にまっさらな状態から始められるようになりました。
