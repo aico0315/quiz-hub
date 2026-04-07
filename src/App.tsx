@@ -30,7 +30,12 @@ function loadSession() {
 }
 
 function clearSession() {
+  // セッション本体を削除
   localStorage.removeItem(SESSION_KEY);
+  // 保存済みのエディタコードを全て削除
+  Object.keys(localStorage)
+    .filter((key) => key.startsWith("quiz-hub-code-"))
+    .forEach((key) => localStorage.removeItem(key));
 }
 
 export default function App() {
@@ -91,6 +96,7 @@ export default function App() {
   }, []);
 
   const handleSelectLevel = useCallback((selectedLevel: Level) => {
+    clearSession();
     setLevel(selectedLevel);
     setCurrentIndex(0);
     setCorrectCount(0);
