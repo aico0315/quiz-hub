@@ -35,7 +35,7 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: "[12000,34000,45000,67000,89000]",
-    explanation: "`sort` に比較関数を渡すと数値順に並び替えられます。\n\n```js\nconst result = sales.sort((a, b) => a - b);\nconsole.log(result);\n```\n\n引数なしの `sort()` は文字列順になるため、数値のソートでは必ず比較関数を渡しましょう。",
+    explanation: "`sort` に比較関数を渡すと数値順に並び替えられます。\n\n```js\nconst result = sales.sort((a, b) => a - b);\nconsole.log(result);\n```\n\n引数なしの `sort()` は文字列順になるため、数値のソートでは必ず比較関数を渡しましょう。\n\n⚠️ `sort()` は元の配列を直接書き換えます（破壊的メソッド）。実務では元データを残したい場合が多いので、スプレッド構文でコピーしてから並び替えるのが安全です。\n\n```js\nconst result = [...sales].sort((a, b) => a - b);\n```",
   },
   {
     id: "l-4",
@@ -75,7 +75,7 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: "5670",
-    explanation: "`Math.max` にスプレッド構文を組み合わせると配列の最大値が取れます。\n\n```js\nconst result = Math.max(...pageViews);\nconsole.log(result);\n```\n\n`...pageViews` で配列を個別の引数として展開しています。",
+    explanation: "`Math.max` にスプレッド構文を組み合わせると配列の最大値が取れます。\n\n```js\nconst result = Math.max(...pageViews);\nconsole.log(result);\n```\n\n`...pageViews` で配列を個別の引数として展開しています。\n\n⚠️ 配列の要素数が非常に多い場合（数万件以上）、スプレッド構文では引数が多すぎてエラーになることがあります。大量データを扱う実務では `reduce` の方が安全です。\n\n```js\nconst result = pageViews.reduce((max, v) => v > max ? v : max, -Infinity);\n```",
   },
   {
     id: "l-7",
@@ -123,7 +123,7 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: '"在庫なし"',
-    explanation: "三項演算子で条件によって値を切り替えられます。\n\n```js\nconst result = stock >= 1 ? '在庫あり' : '在庫なし';\nconsole.log(result);\n```\n\n`条件 ? trueのとき : falseのとき` という書き方です。if文よりも短く書けます。",
+    explanation: "三項演算子で条件によって値を切り替えられます。\n\n```js\nconst result = stock >= 1 ? '在庫あり' : '在庫なし';\nconsole.log(result);\n```\n\n`条件 ? trueのとき : falseのとき` という書き方です。if文よりも短く書けます。\n\n💡 実務では `stock > 0` と書くことが多いです。返品処理などでマイナス在庫が発生するシステムでは `>= 1` より `> 0` の方が意図が明確になります。また、在庫数を表示する場合は三項演算子よりも早期リターンで書くとより読みやすくなります。\n\n```js\nif (stock <= 0) {\n  console.log('在庫なし');\n  return;\n}\nconsole.log('在庫あり');\n```",
   },
   {
     id: "l-11",
@@ -173,6 +173,6 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: '"ワイヤレスイヤホン"',
-    explanation: "`async/await` で非同期処理の結果を受け取れます。\n\n```js\nasync function main() {\n  const product = await fetchProduct();\n  console.log(product.name);\n}\nmain();\n```\n\n`await` を使うことで Promise の完了を待ってから次の行に進めます。実際のAPI呼び出しも同じパターンで書きます。",
+    explanation: "`async/await` で非同期処理の結果を受け取れます。\n\n```js\nasync function main() {\n  const product = await fetchProduct();\n  console.log(product.name);\n}\nmain();\n```\n\n`await` を使うことで Promise の完了を待ってから次の行に進めます。実際のAPI呼び出しも同じパターンで書きます。\n\n⚠️ 実務では `try/catch` によるエラーハンドリングが必須です。APIが失敗したときに何も対処しないと、アプリが意図せず止まったりユーザーに何も表示されなくなります。\n\n```js\nasync function main() {\n  try {\n    const product = await fetchProduct();\n    console.log(product.name);\n  } catch (error) {\n    console.error('取得に失敗しました:', error);\n  }\n}\nmain();\n```",
   },
 ];
