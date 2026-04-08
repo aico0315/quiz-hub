@@ -206,6 +206,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 .outputLabel {
@@ -225,21 +228,18 @@
   border-radius: 4px;
   display: block;
   white-space: pre-wrap;
-  overflow-x: auto;
   word-break: normal;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
 }
 
-.outputBox code::-webkit-scrollbar {
+.outputRow::-webkit-scrollbar {
   height: 6px;
 }
 
-.outputBox code::-webkit-scrollbar-track {
+.outputRow::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.outputBox code::-webkit-scrollbar-thumb {
+.outputRow::-webkit-scrollbar-thumb {
   background-color: var(--border);
   border-radius: 3px;
 }
