@@ -18,12 +18,12 @@ export const logicQuestions: LogicQuestion[] = [
     level: "junior",
     category: "配列の操作",
     question: "ECサイトの商品価格リストに消費税（1.1倍）をかけた、税込み価格の配列を `console.log` で出力してください。",
-    starterCode: `const prices = [1000, 2000, 2500, 4000, 5000];
+    starterCode: `const prices = [1000, 2000, 3000, 4000, 5000];
 
 // ここにコードを書く
 `,
-    expected: "[1100,2200,2750,4400,5500]",
-    explanation: "`map` で各要素を変換した新しい配列を作れます。\n\n```js\nconst result = prices.map(p => p * 1.1);\nconsole.log(result);\n```\n\n`map` は元の配列を変えず、変換後の新しい配列を返します。",
+    expected: "[1100,2200,3300,4400,5500]",
+    explanation: "`map` で各要素を変換した新しい配列を作れます。\n\n```js\nconst result = prices.map(p => Math.round(p * 1.1));\nconsole.log(result);\n```\n\n`p * 1.1` だけだと浮動小数点誤差で `3300.0000000000005` になることがあります。`Math.round()` で丸めることで正確な整数が得られます。`map` は元の配列を変えず、変換後の新しい配列を返します。",
   },
   {
     id: "l-3",
