@@ -223,8 +223,10 @@
   background: var(--bg-subtle);
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
-  word-break: break-word;
+  display: block;
+  word-break: break-all;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .explanation {
