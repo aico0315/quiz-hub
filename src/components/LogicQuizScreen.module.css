@@ -227,6 +227,21 @@
   white-space: pre-wrap;
   overflow-x: auto;
   word-break: normal;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.outputBox code::-webkit-scrollbar {
+  height: 6px;
+}
+
+.outputBox code::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.outputBox code::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 3px;
 }
 
 .explanation {
