@@ -93,7 +93,7 @@ export const logicQuestions: LogicQuestion[] = [
     id: "l-8",
     level: "junior",
     category: "文字列の操作",
-    question: "ECサイトの現在地を示すパンくずリストを、カテゴリの配列から ` / ` で繋いだ文字列にして `console.log` で出力してください。",
+    question: "ECサイトの現在地を示すパンくずリストを、カテゴリの配列から `/`（スラッシュの前後にスペースあり）で繋いだ文字列にして `console.log` で出力してください。",
     starterCode: `const breadcrumb = ['メンズ', 'トップス', 'セール'];
 
 // ここにコードを書く
