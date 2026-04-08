@@ -199,16 +199,16 @@
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1rem 1rem 1.5rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 .outputRow {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
 }
 
 .outputLabel {
@@ -226,20 +226,21 @@
   background: var(--bg-subtle);
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
-  display: block;
-  white-space: pre-wrap;
+  display: inline-block;
+  white-space: pre;
   word-break: normal;
+  min-width: max-content;
 }
 
-.outputRow::-webkit-scrollbar {
+.outputBox::-webkit-scrollbar {
   height: 6px;
 }
 
-.outputRow::-webkit-scrollbar-track {
+.outputBox::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.outputRow::-webkit-scrollbar-thumb {
+.outputBox::-webkit-scrollbar-thumb {
   background-color: var(--border);
   border-radius: 3px;
 }
