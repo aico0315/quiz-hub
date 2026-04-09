@@ -37,7 +37,8 @@ export default function LogicQuizScreen({ question, questionNumber, totalQuestio
     setSubmitted(false);
     setActualOutput([]);
     setRunError(null);
-    textareaRef.current?.focus();
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    if (!isTouchDevice) textareaRef.current?.focus();
   }, [question.id, question.starterCode]);
 
   const handleRun = async () => {
