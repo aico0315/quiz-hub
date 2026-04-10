@@ -14,6 +14,45 @@ function normalize(str: string): string {
   return str.replace(/　/g, " ").trim();
 }
 
+const CODE_START = /^(const |let |var |new |await |fetch|try|catch|\}|\{|if |return |reader\.|es\.|fd\.|el\.|btn\.|form\.|parent\.|ul\.|  )/;
+
+function isCodeLine(line: string): boolean {
+  return CODE_START.test(line);
+}
+
+function renderSupplement(text: string) {
+  const lines = text.split("\n");
+  const result: React.ReactNode[] = [];
+  let codeBuffer: string[] = [];
+
+  const flushCode = (key: number) => {
+    if (codeBuffer.length > 0) {
+      result.push(
+        <pre key={`code-${key}`} className={styles.supplementCode}>
+          <code>{codeBuffer.join("\n")}</code>
+        </pre>
+      );
+      codeBuffer = [];
+    }
+  };
+
+  lines.forEach((line, i) => {
+    if (isCodeLine(line)) {
+      codeBuffer.push(line);
+    } else {
+      flushCode(i);
+      if (line.trim()) {
+        result.push(
+          <p key={i} className={styles.supplementLine}>{line}</p>
+        );
+      }
+    }
+  });
+  flushCode(lines.length);
+
+  return result;
+}
+
 function judge(input: string, answers: string[]): boolean {
   const normalized = normalize(input);
   return answers.some((answer) => normalized === answer);
@@ -100,9 +139,7 @@ export default function MethodQuizScreen({ question, questionNumber, totalQuesti
           </div>
           <div className={styles.supplement}>
             <span className={styles.supplementLabel}>補足</span>
-            {question.supplement.split("\n").map((line, i) => (
-              <p key={i} className={styles.supplementLine}>{line}</p>
-            ))}
+            {renderSupplement(question.supplement)}
           </div>
           <button className={styles.nextButton} onClick={() => onNext(isCorrect)}>
             次の問題へ →

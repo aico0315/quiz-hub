@@ -56,7 +56,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "新しいHTML要素を作成したいとき",
     answer: ["document.createElement"],
-    supplement: "例：const li = document.createElement('li'); li.textContent = '新しい項目'; ul.appendChild(li) のように、要素を作って中身を設定してから親要素に追加する流れが基本。\n作っただけでは画面に表示されない点に注意。",
+    supplement: "例：要素を作って中身を設定してから親要素に追加する流れが基本。\nconst li = document.createElement('li')\nli.textContent = '新しい項目'\nul.appendChild(li)\n作っただけでは画面に表示されない点に注意。",
   },
   {
     id: "w-8",
@@ -89,7 +89,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "フォームのsubmitなど、デフォルトのブラウザ動作をキャンセルしたいとき",
     answer: ["preventDefault"],
-    supplement: "例：\nform.addEventListener('submit', (e) => {\n  e.preventDefault(); // 独自の送信処理\n})\nこれをしないとフォーム送信時にページがリロードされてしまう。\nリンクのデフォルト遷移をキャンセルする場合にも使う。",
+    supplement: "例：\nform.addEventListener('submit', (e) => {\n  e.preventDefault()\n  // ここで独自の送信処理\n})\nこれをしないとフォーム送信時にページがリロードされてしまう。\nリンクのデフォルト遷移をキャンセルする場合にも使う。",
   },
   // ストレージ
   {
@@ -98,7 +98,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "ブラウザを閉じても残るデータをキーバリューで保存したいとき",
     answer: ["localStorage"],
-    supplement: "例：\nlocalStorage.setItem('theme', 'dark')\nでダークモード設定を保存し、次回アクセス時に\nlocalStorage.getItem('theme')\nで取り出せる。\nオブジェクトを保存したい場合は JSON.stringify() で文字列に変換してから保存する。",
+    supplement: "例：ダークモード設定の保存と取り出し。\nlocalStorage.setItem('theme', 'dark')\nlocalStorage.getItem('theme') // => 'dark'\nオブジェクトを保存したい場合は JSON.stringify() で文字列に変換してから保存する。",
   },
   {
     id: "w-13",
@@ -114,7 +114,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "localStorageからJSON形式のデータを読み込みたいとき",
     answer: ["JSON.parse"],
-    supplement: "例：\nconst user = JSON.parse(\n  localStorage.getItem('user')\n)\nでオブジェクトとして取り出せる。\nlocalStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
+    supplement: "例：\nconst user = JSON.parse(localStorage.getItem('user'))\nでオブジェクトとして取り出せる。\nlocalStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
   },
   // 通信
   {
@@ -123,7 +123,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "外部APIにHTTPリクエストを送りたいとき",
     answer: ["fetch"],
-    supplement: "例：\nfetch('https://api.example.com/users')\n  .then(r => r.json())\n  .then(data => console.log(data))\nのように使う。\n404や500のエラーでも Promise は reject にならないので、response.ok で成功確認するのがよい。",
+    supplement: "例：\nfetch('https://api.example.com/users')\n  .then(r => r.json())\n  .then(data => console.log(data))\n404や500のエラーでも Promise は reject にならないので、response.ok で成功確認するのがよい。",
   },
   {
     id: "w-16",
@@ -140,7 +140,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "タイマー",
     question: "一定時間後に1度だけ処理を実行したいとき",
     answer: ["setTimeout"],
-    supplement: "例：\nsetTimeout(() => setMessage(''), 3000)\nで3秒後にメッセージを消す、といった使い方が一般的。\nミリ秒単位で指定する。\nキャンセルしたい場合は const id = setTimeout(...) で受け取り clearTimeout(id) で止める。",
+    supplement: "例：3秒後にメッセージを消す。\nsetTimeout(() => setMessage(''), 3000)\nミリ秒単位で指定する。\nキャンセルしたい場合は const id = setTimeout(...) で受け取り clearTimeout(id) で止める。",
   },
   {
     id: "w-18",
@@ -148,7 +148,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "タイマー",
     question: "一定時間ごとに繰り返し処理を実行したいとき",
     answer: ["setInterval"],
-    supplement: "例：\nconst id = setInterval(() => setCount(c => c + 1), 1000)\nで1秒ごとにカウントアップできる。\n止めたい場合は clearInterval(id) を呼ぶ。\n止め忘れるとバックグラウンドで処理が走り続けるので注意。",
+    supplement: "例：1秒ごとにカウントアップする。\nconst id = setInterval(() => setCount(c => c + 1), 1000)\n止めたい場合は clearInterval(id) を呼ぶ。\n止め忘れるとバックグラウンドで処理が走り続けるので注意。",
   },
   // ナビゲーション
   {
@@ -165,7 +165,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ナビゲーション",
     question: "現在のURLのクエリパラメータを取得・操作したいとき",
     answer: ["URLSearchParams"],
-    supplement: "例：URL が /search?q=javascript&page=2 のとき、new URLSearchParams(location.search).get('q') で 'javascript' を取得できる。\n検索フィルターやページネーションの実装でよく使う。",
+    supplement: "例：URL が /search?q=javascript&page=2 のとき\nnew URLSearchParams(location.search).get('q') // => 'javascript'\n検索フィルターやページネーションの実装でよく使う。",
   },
   // その他
   {
@@ -198,7 +198,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "要素がビューポートに入ったタイミングを検知したいとき（遅延読み込みなど）",
     answer: ["IntersectionObserver"],
-    supplement: "例：\nnew IntersectionObserver((entries) => {\n  if (entries[0].isIntersecting) loadImage();\n}).observe(imgEl)\nで、画像がスクロールで見えたタイミングで読み込む「遅延読み込み」が実装できる。\nscroll イベントより処理が軽い。",
+    supplement: "例：画像がスクロールで見えたタイミングで読み込む「遅延読み込み」の実装。\nnew IntersectionObserver((entries) => {\n  if (entries[0].isIntersecting) loadImage()\n}).observe(imgEl)\nscroll イベントより処理が軽い。",
   },
 
   // ---- middle ----
@@ -210,7 +210,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "複数のPromiseを並列実行して、全て完了したら結果をまとめて受け取りたいとき",
     answer: ["Promise.all"],
-    supplement: "例：\nconst [user, posts] = await Promise.all([fetchUser(id), fetchPosts(id)])\nでユーザー情報と投稿を同時に取得できる。\n順番に fetch するより速い。\nただし1つでも失敗すると全体が reject になるので、全件成功が前提の場面で使う。",
+    supplement: "例：ユーザー情報と投稿を同時に取得する。\nconst [user, posts] = await Promise.all([fetchUser(id), fetchPosts(id)])\n順番に fetch するより速い。\nただし1つでも失敗すると全体が reject になるので、全件成功が前提の場面で使う。",
   },
   {
     id: "w-26",
@@ -234,7 +234,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "async関数内でfetchのエラー（ネットワークエラーやステータスエラー）を適切に処理したいとき",
     answer: ["try/catch"],
-    supplement: "例：\ntry {\n  const res = await fetch(url);\n  if (!res.ok) throw new Error('取得失敗');\n  const data = await res.json();\n} catch (e) {\n  setError(e.message);\n}\nfetch は404や500でも reject しないため、response.ok の確認が必要。",
+    supplement: "例：\ntry {\n  const res = await fetch(url)\n  if (!res.ok) throw new Error('取得失敗')\n  const data = await res.json()\n} catch (e) {\n  setError(e.message)\n}\nfetch は404や500でも reject しないため、response.ok の確認が必要。",
   },
 
   // フォーム・ファイル
@@ -244,7 +244,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "フォーム",
     question: "画像やファイルを含むフォームデータをfetchでPOST送信したいとき",
     answer: ["FormData"],
-    supplement: "例：プロフィール画像のアップロードで\nconst fd = new FormData();\nfd.append('avatar', file);\nfetch('/upload', { method: 'POST', body: fd })\nのように使う。\nContent-Type は自動で multipart/form-data になるので自分で指定しなくてよい。",
+    supplement: "例：プロフィール画像のアップロード。\nconst fd = new FormData()\nfd.append('avatar', file)\nfetch('/upload', { method: 'POST', body: fd })\nContent-Type は自動で multipart/form-data になるので自分で指定しなくてよい。",
   },
   {
     id: "w-30",
@@ -252,7 +252,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "フォーム",
     question: "ユーザーがファイルを選択した時にその内容をブラウザ上で読み取りたいとき",
     answer: ["FileReader"],
-    supplement: "例：input の change イベントで\nconst reader = new FileReader();\nreader.onload = (e) => setPreview(e.target.result);\nreader.readAsDataURL(file)\nのように使う。\n画像選択後に即プレビューを表示する機能でよく使われる。",
+    supplement: "例：画像選択後に即プレビューを表示する。\nconst reader = new FileReader()\nreader.onload = (e) => setPreview(e.target.result)\nreader.readAsDataURL(file)\n画像選択後に即プレビューを表示する機能でよく使われる。",
   },
 
   // パフォーマンス
@@ -278,7 +278,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "ブラウザの描画タイミングに合わせてアニメーションを実行したいとき",
     answer: ["requestAnimationFrame"],
-    supplement: "例：const animate = () => { el.style.left = x + 'px'; x++; requestAnimationFrame(animate); } のように使う。\nsetInterval より滑らかで、タブが非アクティブなときは自動で止まるので無駄な処理が走らない。",
+    supplement: "例：\nconst animate = () => {\n  el.style.left = x + 'px'\n  x++\n  requestAnimationFrame(animate)\n}\nsetInterval より滑らかで、タブが非アクティブなときは自動で止まるので無駄な処理が走らない。",
   },
 
   // セキュリティ
@@ -288,7 +288,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "セキュリティ",
     question: "ユーザー入力をそのままinnerHTMLに入れると発生するセキュリティリスクは何？",
     answer: ["XSS", "クロスサイトスクリプティング"],
-    supplement: "例：el.innerHTML = userInput で <script>悪意のあるコード</script> が実行されてしまう。\n対策はユーザー入力の表示に textContent を使うこと。\nどうしても HTML を挿入する場合は DOMPurify などでサニタイズ（無害化）してから使う。",
+    supplement: "例：el.innerHTML = userInput で悪意あるスクリプトが実行されてしまう。\n対策はユーザー入力の表示に textContent を使うこと。\nどうしても HTML を挿入する場合は DOMPurify などでサニタイズ（無害化）してから使う。",
   },
   {
     id: "w-35",
@@ -306,7 +306,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "サーバーからリアルタイムにデータをストリームで受け取りたいとき（チャットやログなど）",
     answer: ["EventSource"],
-    supplement: "例：\nconst es = new EventSource('/notifications');\nes.onmessage = (e) => addNotification(e.data)\nでサーバーからのプッシュ通知を受け取れる。\nWebSocket より実装がシンプルで、サーバー→クライアントの一方向通信に向いている。",
+    supplement: "例：サーバーからのプッシュ通知を受け取る。\nconst es = new EventSource('/notifications')\nes.onmessage = (e) => addNotification(e.data)\nWebSocket より実装がシンプルで、サーバー→クライアントの一方向通信に向いている。",
   },
   {
     id: "w-37",
@@ -322,6 +322,6 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "DOM要素の追加・削除・属性変更を監視したいとき",
     answer: ["MutationObserver"],
-    supplement: "例：サードパーティのウィジェットが DOM を書き換えた後に独自処理を実行したい場合や、チャットアプリで新しいメッセージが追加されたら自動スクロールする場面で使われる。\nnew MutationObserver(callback).observe(target, { childList: true }) のように設定する。",
+    supplement: "例：新しいメッセージが追加されたら自動スクロールする。\nnew MutationObserver(callback).observe(target, { childList: true })\nサードパーティのウィジェットが DOM を書き換えた後に独自処理を実行したい場合にも使われる。",
   },
 ];

@@ -190,7 +190,7 @@
 }
 
 .supplementLine {
-  margin: 0 0 0.85rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 0.9rem;
   color: var(--text-body);
   line-height: 1.65;
@@ -200,6 +200,22 @@
 
 .supplementLine:last-child {
   margin-bottom: 0;
+}
+
+.supplementCode {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin: 0.3rem 0 0.5rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.supplementCode code {
+  font-family: "Fira Code", "Courier New", monospace;
 }
 
 .nextButton {
