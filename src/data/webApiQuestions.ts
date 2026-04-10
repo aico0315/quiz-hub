@@ -8,7 +8,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "CSSセレクターで指定した最初の要素を取得したいとき",
     answer: ["document.querySelector"],
-    supplement: "例：document.querySelector('.btn') でクラス名が btn の最初の要素を取得できる。見つからない場合は null を返すので、操作前に if (el) で確認するのが安全。複数まとめて取得したい場合は querySelectorAll を使う。",
+    supplement: "例：document.querySelector('.btn') でクラス名が btn の最初の要素を取得できる。\n見つからない場合は null を返すので、操作前に if (el) で確認するのが安全。\n複数まとめて取得したい場合は querySelectorAll を使う。",
   },
   {
     id: "w-2",
@@ -16,7 +16,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "CSSセレクターにマッチする全ての要素を取得したいとき",
     answer: ["document.querySelectorAll"],
-    supplement: "例：document.querySelectorAll('li') でリストアイテムを全件取得できる。返り値は NodeList なので forEach で回せる。「全てのカードにイベントを登録したい」という場面でよく使う。",
+    supplement: "例：document.querySelectorAll('li') でリストアイテムを全件取得できる。\n返り値は NodeList なので forEach で回せる。\n「全てのカードにイベントを登録したい」という場面でよく使う。",
   },
   {
     id: "w-3",
@@ -24,7 +24,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "id属性で特定の要素を取得したいとき",
     answer: ["document.getElementById"],
-    supplement: "例：document.getElementById('submit-btn') で id が submit-btn の要素を取得できる。querySelector('#submit-btn') と同じだが、こちらの方が高速。# は不要なので注意。",
+    supplement: "例：document.getElementById('submit-btn') で id が submit-btn の要素を取得できる。\nquerySelector('#submit-btn') と同じだが、こちらの方が高速。\n# は不要なので注意。",
   },
   {
     id: "w-4",
@@ -32,7 +32,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素のテキストを書き換えたいとき（HTMLタグを含めない）",
     answer: ["textContent"],
-    supplement: "例：el.textContent = '読み込み中...' でボタンのテキストを動的に変えられる。innerHTML と違い HTMLタグをそのまま文字として表示するので、ユーザー入力を表示する際は textContent の方が安全。",
+    supplement: "例：el.textContent = '読み込み中...' でボタンのテキストを動的に変えられる。\ninnerHTML と違い HTML タグをそのまま文字として表示するので、ユーザー入力を表示する際は textContent の方が安全。",
   },
   {
     id: "w-5",
@@ -40,7 +40,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素にクラスを追加・削除・トグルしたいとき",
     answer: ["classList"],
-    supplement: "例：el.classList.add('active') でメニューを開いた状態にする、el.classList.toggle('open') でアコーディオンの開閉を切り替えるといった使い方が一般的。className を直接書き換えると既存のクラスが消えるので classList の方が安全。",
+    supplement: "例：el.classList.add('active') でメニューを開いた状態にする。\nel.classList.toggle('open') でアコーディオンの開閉を切り替えるといった使い方が一般的。\nclassName を直接書き換えると既存のクラスが消えるので classList の方が安全。",
   },
   {
     id: "w-6",
@@ -48,7 +48,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素の属性値を取得したいとき",
     answer: ["getAttribute"],
-    supplement: "例：el.getAttribute('href') でリンク先URLを取得したり、el.getAttribute('data-id') でカスタム属性の値を取り出したりできる。属性を設定したい場合は setAttribute('disabled', 'true') のように使う。",
+    supplement: "例：el.getAttribute('href') でリンク先URLを取得したり、el.getAttribute('data-id') でカスタム属性の値を取り出したりできる。\n属性を設定したい場合は setAttribute('disabled', 'true') のように使う。",
   },
   {
     id: "w-7",
@@ -56,7 +56,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "新しいHTML要素を作成したいとき",
     answer: ["document.createElement"],
-    supplement: "例：const li = document.createElement('li'); li.textContent = '新しい項目'; ul.appendChild(li) のように、要素を作って中身を設定してから親要素に追加する流れが基本。作っただけでは画面に表示されない点に注意。",
+    supplement: "例：const li = document.createElement('li'); li.textContent = '新しい項目'; ul.appendChild(li) のように、要素を作って中身を設定してから親要素に追加する流れが基本。\n作っただけでは画面に表示されない点に注意。",
   },
   {
     id: "w-8",
@@ -64,7 +64,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "親要素の末尾に子要素を追加したいとき",
     answer: ["appendChild"],
-    supplement: "例：ul.appendChild(li) でリストの末尾に新しい項目を追加できる。ToDoアプリでタスクを追加する場面などでよく使う。すでにDOMにある要素を渡すと「コピー」ではなく「移動」になるので注意。",
+    supplement: "例：ul.appendChild(li) でリストの末尾に新しい項目を追加できる。\nToDoアプリでタスクを追加する場面などでよく使う。\nすでにDOMにある要素を渡すと「コピー」ではなく「移動」になるので注意。",
   },
   // イベント
   {
@@ -73,7 +73,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "ボタンのクリックやフォームの入力などのイベントを監視したいとき",
     answer: ["addEventListener"],
-    supplement: "例：btn.addEventListener('click', () => alert('クリックされた')) でボタンのクリックを検知できる。同じ要素に複数のイベントを登録できるのが強み。input イベントで入力のたびにリアルタイム検索するといった使い方もよくある。",
+    supplement: "例：btn.addEventListener('click', () => alert('クリックされた')) でボタンのクリックを検知できる。\n同じ要素に複数のイベントを登録できるのが強み。\ninput イベントで入力のたびにリアルタイム検索するといった使い方もよくある。",
   },
   {
     id: "w-10",
@@ -81,7 +81,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "登録済みのイベントリスナーを解除したいとき",
     answer: ["removeEventListener"],
-    supplement: "例：btn.removeEventListener('click', handleClick) のように使う。ポイントは addEventListener に渡した関数と同じ参照を渡すこと。() => {} のような匿名関数では解除できないため、関数を変数に入れておくのがコツ。",
+    supplement: "例：btn.removeEventListener('click', handleClick) のように使う。\nポイントは addEventListener に渡した関数と同じ参照を渡すこと。\n() => {} のような匿名関数では解除できないため、関数を変数に入れておくのがコツ。",
   },
   {
     id: "w-11",
@@ -89,7 +89,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "フォームのsubmitなど、デフォルトのブラウザ動作をキャンセルしたいとき",
     answer: ["preventDefault"],
-    supplement: "例：form.addEventListener('submit', (e) => { e.preventDefault(); // ここで独自の送信処理 }) のように使う。これをしないとフォーム送信時にページがリロードされてしまう。リンクのデフォルト遷移をキャンセルする場合にも使う。",
+    supplement: "例：form.addEventListener('submit', (e) => { e.preventDefault(); // 独自の送信処理 }) のように使う。\nこれをしないとフォーム送信時にページがリロードされてしまう。\nリンクのデフォルト遷移をキャンセルする場合にも使う。",
   },
   // ストレージ
   {
@@ -98,7 +98,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "ブラウザを閉じても残るデータをキーバリューで保存したいとき",
     answer: ["localStorage"],
-    supplement: "例：localStorage.setItem('theme', 'dark') でダークモード設定を保存し、次回アクセス時に localStorage.getItem('theme') で取り出せる。オブジェクトを保存したい場合は JSON.stringify() で文字列に変換してから保存する。",
+    supplement: "例：localStorage.setItem('theme', 'dark') でダークモード設定を保存し、次回アクセス時に localStorage.getItem('theme') で取り出せる。\nオブジェクトを保存したい場合は JSON.stringify() で文字列に変換してから保存する。",
   },
   {
     id: "w-13",
@@ -106,7 +106,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "タブを閉じたら消えるセッション単位のデータを保存したいとき",
     answer: ["sessionStorage"],
-    supplement: "例：フォームの途中入力内容を sessionStorage に保存しておき、ページ遷移後に復元するといった使い方ができる。タブを閉じると自動的に消えるので、ログイン中だけ使う一時データに向いている。APIは localStorage と全く同じ。",
+    supplement: "例：フォームの途中入力内容を sessionStorage に保存しておき、ページ遷移後に復元するといった使い方ができる。\nタブを閉じると自動的に消えるので、ログイン中だけ使う一時データに向いている。\nAPIは localStorage と全く同じ。",
   },
   {
     id: "w-14",
@@ -114,7 +114,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "localStorageからJSON形式のデータを読み込みたいとき",
     answer: ["JSON.parse"],
-    supplement: "例：const user = JSON.parse(localStorage.getItem('user')) でオブジェクトとして取り出せる。localStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
+    supplement: "例：const user = JSON.parse(localStorage.getItem('user')) でオブジェクトとして取り出せる。\nlocalStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
   },
   // 通信
   {
@@ -123,7 +123,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "外部APIにHTTPリクエストを送りたいとき",
     answer: ["fetch"],
-    supplement: "例：fetch('https://api.example.com/users').then(r => r.json()).then(data => console.log(data)) のように使う。404や500のエラーでも Promise は reject にならないので、response.ok で成功確認するのがよい。",
+    supplement: "例：fetch('https://api.example.com/users').then(r => r.json()).then(data => console.log(data)) のように使う。\n404や500のエラーでも Promise は reject にならないので、response.ok で成功確認するのがよい。",
   },
   {
     id: "w-16",
@@ -131,7 +131,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "fetchのレスポンスをJSONとして取得したいとき",
     answer: ["json"],
-    supplement: "例：const data = await response.json() でAPIのレスポンスをオブジェクトとして受け取れる。Promise を返す非同期処理なので await が必要。テキストで受け取りたい場合は response.text()、バイナリは response.blob() を使う。",
+    supplement: "例：const data = await response.json() でAPIのレスポンスをオブジェクトとして受け取れる。\nPromise を返す非同期処理なので await が必要。\nテキストで受け取りたい場合は response.text()、バイナリは response.blob() を使う。",
   },
   // タイマー
   {
@@ -140,7 +140,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "タイマー",
     question: "一定時間後に1度だけ処理を実行したいとき",
     answer: ["setTimeout"],
-    supplement: "例：setTimeout(() => setMessage(''), 3000) で3秒後にメッセージを消す、といった使い方が一般的。ミリ秒単位で指定する。キャンセルしたい場合は const id = setTimeout(...) で受け取り clearTimeout(id) で止める。",
+    supplement: "例：setTimeout(() => setMessage(''), 3000) で3秒後にメッセージを消す、といった使い方が一般的。\nミリ秒単位で指定する。\nキャンセルしたい場合は const id = setTimeout(...) で受け取り clearTimeout(id) で止める。",
   },
   {
     id: "w-18",
@@ -148,7 +148,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "タイマー",
     question: "一定時間ごとに繰り返し処理を実行したいとき",
     answer: ["setInterval"],
-    supplement: "例：const id = setInterval(() => setCount(c => c + 1), 1000) で1秒ごとにカウントアップできる。止めたい場合は clearInterval(id) を呼ぶ。止め忘れるとバックグラウンドで処理が走り続けるので注意。",
+    supplement: "例：const id = setInterval(() => setCount(c => c + 1), 1000) で1秒ごとにカウントアップできる。\n止めたい場合は clearInterval(id) を呼ぶ。\n止め忘れるとバックグラウンドで処理が走り続けるので注意。",
   },
   // ナビゲーション
   {
@@ -157,7 +157,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ナビゲーション",
     question: "SPAでURLを変更しながらページを再読み込みせずに履歴を追加したいとき",
     answer: ["history.pushState"],
-    supplement: "例：history.pushState({}, '', '/about') でページをリロードせずに URL を /about に変更できる。React Router や Next.js のルーティングもこの仕組みを使っている。ブラウザの「戻る」ボタンも機能する。",
+    supplement: "例：history.pushState({}, '', '/about') でページをリロードせずに URL を /about に変更できる。\nReact Router や Next.js のルーティングもこの仕組みを使っている。\nブラウザの「戻る」ボタンも機能する。",
   },
   {
     id: "w-20",
@@ -165,7 +165,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ナビゲーション",
     question: "現在のURLのクエリパラメータを取得・操作したいとき",
     answer: ["URLSearchParams"],
-    supplement: "例：URL が /search?q=javascript&page=2 のとき、new URLSearchParams(location.search).get('q') で 'javascript' を取得できる。検索フィルターやページネーションの実装でよく使う。",
+    supplement: "例：URL が /search?q=javascript&page=2 のとき、new URLSearchParams(location.search).get('q') で 'javascript' を取得できる。\n検索フィルターやページネーションの実装でよく使う。",
   },
   // その他
   {
@@ -174,7 +174,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ウィンドウ",
     question: "ページの一番上までスクロールしたいとき",
     answer: ["window.scrollTo"],
-    supplement: "例：window.scrollTo({ top: 0, behavior: 'smooth' }) で「トップへ戻る」ボタンの実装ができる。behavior: 'smooth' をつけるとなめらかにスクロールする。{ top: 0, behavior: 'instant' } にすると即座に移動する。",
+    supplement: "例：window.scrollTo({ top: 0, behavior: 'smooth' }) で「トップへ戻る」ボタンの実装ができる。\nbehavior: 'smooth' をつけるとなめらかにスクロールする。\n{ top: 0, behavior: 'instant' } にすると即座に移動する。",
   },
   {
     id: "w-22",
@@ -182,7 +182,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ウィンドウ",
     question: "テキストをクリップボードにコピーしたいとき",
     answer: ["navigator.clipboard.writeText"],
-    supplement: "例：await navigator.clipboard.writeText(url) で招待URLをワンクリックでコピーするボタンが実装できる。Promise を返すので await が必要。HTTP 環境では動作しないため、開発時も localhost で確認する。",
+    supplement: "例：await navigator.clipboard.writeText(url) で招待URLをワンクリックでコピーするボタンが実装できる。\nPromise を返すので await が必要。\nHTTP 環境では動作しないため、開発時も localhost で確認する。",
   },
   {
     id: "w-23",
@@ -190,7 +190,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素のスクロール位置やサイズ情報（幅・高さ・座標）を取得したいとき",
     answer: ["getBoundingClientRect"],
-    supplement: "例：const rect = el.getBoundingClientRect() で rect.top / rect.left / rect.width / rect.height が取れる。「要素が画面内に見えているか」の判定や、ツールチップの表示位置計算によく使われる。",
+    supplement: "例：const rect = el.getBoundingClientRect() で rect.top / rect.left / rect.width / rect.height が取れる。\n「要素が画面内に見えているか」の判定や、ツールチップの表示位置計算によく使われる。",
   },
   {
     id: "w-24",
@@ -198,7 +198,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "要素がビューポートに入ったタイミングを検知したいとき（遅延読み込みなど）",
     answer: ["IntersectionObserver"],
-    supplement: "例：new IntersectionObserver((entries) => { if (entries[0].isIntersecting) loadImage(); }).observe(imgEl) で、画像がスクロールで見えたタイミングで読み込む「遅延読み込み」が実装できる。scroll イベントより処理が軽い。",
+    supplement: "例：new IntersectionObserver((entries) => { if (entries[0].isIntersecting) loadImage(); }).observe(imgEl) で、画像がスクロールで見えたタイミングで読み込む「遅延読み込み」が実装できる。\nscroll イベントより処理が軽い。",
   },
 
   // ---- middle ----
@@ -210,7 +210,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "複数のPromiseを並列実行して、全て完了したら結果をまとめて受け取りたいとき",
     answer: ["Promise.all"],
-    supplement: "例：const [user, posts] = await Promise.all([fetchUser(id), fetchPosts(id)]) でユーザー情報と投稿を同時に取得できる。順番に fetch するより速い。ただし1つでも失敗すると全体が reject になるので、全件成功が前提の場面で使う。",
+    supplement: "例：const [user, posts] = await Promise.all([fetchUser(id), fetchPosts(id)]) でユーザー情報と投稿を同時に取得できる。\n順番に fetch するより速い。\nただし1つでも失敗すると全体が reject になるので、全件成功が前提の場面で使う。",
   },
   {
     id: "w-26",
@@ -218,7 +218,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "複数のPromiseを並列実行して、失敗しても全ての結果（成功・失敗）をまとめて受け取りたいとき",
     answer: ["Promise.allSettled"],
-    supplement: "例：複数の外部APIに同時にリクエストし、失敗したものだけ再試行したい場合に使う。各結果が { status: 'fulfilled', value } または { status: 'rejected', reason } の形で返るので、status で成否を判定できる。",
+    supplement: "例：複数の外部APIに同時にリクエストし、失敗したものだけ再試行したい場合に使う。\n各結果が { status: 'fulfilled', value } または { status: 'rejected', reason } の形で返るので、status で成否を判定できる。",
   },
   {
     id: "w-27",
@@ -226,7 +226,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "fetchリクエストをタイムアウトやユーザー操作でキャンセルしたいとき",
     answer: ["AbortController"],
-    supplement: "例：Reactで useEffect 内で fetch する場合、クリーンアップ関数で controller.abort() を呼ぶとコンポーネントがアンマウントされたときにリクエストをキャンセルできる。画面遷移時のメモリリーク防止に役立つ。",
+    supplement: "例：Reactで useEffect 内で fetch する場合、クリーンアップ関数で controller.abort() を呼ぶとコンポーネントがアンマウントされたときにリクエストをキャンセルできる。\n画面遷移時のメモリリーク防止に役立つ。",
   },
   {
     id: "w-28",
@@ -234,7 +234,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "async関数内でfetchのエラー（ネットワークエラーやステータスエラー）を適切に処理したいとき",
     answer: ["try/catch"],
-    supplement: "例：try { const res = await fetch(url); if (!res.ok) throw new Error('取得失敗'); const data = await res.json(); } catch (e) { setError(e.message); } のように書く。fetch は404や500でも reject しないため、response.ok の確認が必要。",
+    supplement: "例：try { const res = await fetch(url); if (!res.ok) throw new Error('取得失敗'); const data = await res.json(); } catch (e) { setError(e.message); } のように書く。\nfetch は404や500でも reject しないため、response.ok の確認が必要。",
   },
 
   // フォーム・ファイル
@@ -244,7 +244,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "フォーム",
     question: "画像やファイルを含むフォームデータをfetchでPOST送信したいとき",
     answer: ["FormData"],
-    supplement: "例：プロフィール画像のアップロードで const fd = new FormData(); fd.append('avatar', file); fetch('/upload', { method: 'POST', body: fd }) のように使う。Content-Type は自動で multipart/form-data になるので自分で指定しなくてよい。",
+    supplement: "例：プロフィール画像のアップロードで const fd = new FormData(); fd.append('avatar', file); fetch('/upload', { method: 'POST', body: fd }) のように使う。\nContent-Type は自動で multipart/form-data になるので自分で指定しなくてよい。",
   },
   {
     id: "w-30",
@@ -252,7 +252,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "フォーム",
     question: "ユーザーがファイルを選択した時にその内容をブラウザ上で読み取りたいとき",
     answer: ["FileReader"],
-    supplement: "例：input の change イベントで const reader = new FileReader(); reader.onload = (e) => setPreview(e.target.result); reader.readAsDataURL(file) のように使う。画像選択後に即プレビューを表示する機能でよく使われる。",
+    supplement: "例：input の change イベントで const reader = new FileReader(); reader.onload = (e) => setPreview(e.target.result); reader.readAsDataURL(file) のように使う。\n画像選択後に即プレビューを表示する機能でよく使われる。",
   },
 
   // パフォーマンス
@@ -262,7 +262,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "入力イベントなど頻繁に発火する処理を、最後の実行から一定時間後に1回だけ実行したいとき",
     answer: ["debounce"],
-    supplement: "例：検索ボックスへの入力のたびにAPIを叩くと負荷がかかるため、入力が止まってから300ms後に1回だけ実行するようにする。setTimeout + clearTimeout の組み合わせで自前実装するか、lodash の debounce を使う。",
+    supplement: "例：検索ボックスへの入力のたびにAPIを叩くと負荷がかかるため、入力が止まってから300ms後に1回だけ実行するようにする。\nsetTimeout + clearTimeout の組み合わせで自前実装するか、lodash の debounce を使う。",
   },
   {
     id: "w-32",
@@ -270,7 +270,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "スクロールやリサイズなど頻繁なイベントを、一定間隔で間引いて実行したいとき",
     answer: ["throttle"],
-    supplement: "例：スクロール位置に応じてヘッダーの表示を切り替える処理を、100ms ごとに1回だけ実行するようにする。debounce は「止まった後に1回」だが throttle は「一定間隔で必ず実行」する点が違う。途中経過が必要な場面に向いている。",
+    supplement: "例：スクロール位置に応じてヘッダーの表示を切り替える処理を、100ms ごとに1回だけ実行するようにする。\ndebounce は「止まった後に1回」だが throttle は「一定間隔で必ず実行」する点が違う。\n途中経過が必要な場面に向いている。",
   },
   {
     id: "w-33",
@@ -278,7 +278,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "ブラウザの描画タイミングに合わせてアニメーションを実行したいとき",
     answer: ["requestAnimationFrame"],
-    supplement: "例：const animate = () => { el.style.left = x + 'px'; x++; requestAnimationFrame(animate); } のように使う。setInterval より滑らかで、タブが非アクティブなときは自動で止まるので無駄な処理が走らない。",
+    supplement: "例：const animate = () => { el.style.left = x + 'px'; x++; requestAnimationFrame(animate); } のように使う。\nsetInterval より滑らかで、タブが非アクティブなときは自動で止まるので無駄な処理が走らない。",
   },
 
   // セキュリティ
@@ -288,7 +288,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "セキュリティ",
     question: "ユーザー入力をそのままinnerHTMLに入れると発生するセキュリティリスクは何？",
     answer: ["XSS", "クロスサイトスクリプティング"],
-    supplement: "例：el.innerHTML = userInput で <script>悪意のあるコード</script> が実行されてしまう。対策はユーザー入力の表示に textContent を使うこと。どうしても HTML を挿入する場合は DOMPurify などでサニタイズ（無害化）してから使う。",
+    supplement: "例：el.innerHTML = userInput で <script>悪意のあるコード</script> が実行されてしまう。\n対策はユーザー入力の表示に textContent を使うこと。\nどうしても HTML を挿入する場合は DOMPurify などでサニタイズ（無害化）してから使う。",
   },
   {
     id: "w-35",
@@ -296,7 +296,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "セキュリティ",
     question: "別オリジンのAPIにfetchするとブラウザに弾かれることがある。この仕組みの名前は？",
     answer: ["CORS", "オリジン間リソース共有"],
-    supplement: "例：localhost:3000 のフロントから api.example.com にリクエストすると CORS エラーになる場合がある。解決はサーバー側で Access-Control-Allow-Origin ヘッダーを設定すること。フロントエンドだけでは対処できないのでバックエンド担当者に依頼が必要。",
+    supplement: "例：localhost:3000 のフロントから api.example.com にリクエストすると CORS エラーになる場合がある。\n解決はサーバー側で Access-Control-Allow-Origin ヘッダーを設定すること。\nフロントエンドだけでは対処できないのでバックエンド担当者に依頼が必要。",
   },
 
   // モダンAPI
@@ -306,7 +306,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "サーバーからリアルタイムにデータをストリームで受け取りたいとき（チャットやログなど）",
     answer: ["EventSource"],
-    supplement: "例：const es = new EventSource('/notifications'); es.onmessage = (e) => addNotification(e.data) でサーバーからのプッシュ通知を受け取れる。WebSocket より実装がシンプルで、サーバー→クライアントの一方向通信に向いている。",
+    supplement: "例：const es = new EventSource('/notifications'); es.onmessage = (e) => addNotification(e.data) でサーバーからのプッシュ通知を受け取れる。\nWebSocket より実装がシンプルで、サーバー→クライアントの一方向通信に向いている。",
   },
   {
     id: "w-37",
@@ -314,7 +314,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ストレージ",
     question: "localStorageより大容量で、オブジェクトやBlobもそのまま保存できるブラウザ内DBは？",
     answer: ["IndexedDB"],
-    supplement: "例：オフライン対応アプリで、ネット接続がないときのデータを IndexedDB に保存しておき、接続が回復したらサーバーに同期するといった使い方ができる。直接扱うのは複雑なため idb などのラッパーライブラリを使うのが一般的。",
+    supplement: "例：オフライン対応アプリで、ネット接続がないときのデータを IndexedDB に保存しておき、接続が回復したらサーバーに同期するといった使い方ができる。\n直接扱うのは複雑なため idb などのラッパーライブラリを使うのが一般的。",
   },
   {
     id: "w-38",
@@ -322,6 +322,6 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "DOM要素の追加・削除・属性変更を監視したいとき",
     answer: ["MutationObserver"],
-    supplement: "例：サードパーティのウィジェットが DOM を書き換えた後に独自処理を実行したい場合や、チャットアプリで新しいメッセージが追加されたら自動スクロールする場面で使われる。new MutationObserver(callback).observe(target, { childList: true }) のように設定する。",
+    supplement: "例：サードパーティのウィジェットが DOM を書き換えた後に独自処理を実行したい場合や、チャットアプリで新しいメッセージが追加されたら自動スクロールする場面で使われる。\nnew MutationObserver(callback).observe(target, { childList: true }) のように設定する。",
   },
 ];
