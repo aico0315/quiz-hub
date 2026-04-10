@@ -114,7 +114,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "localStorageからJSON形式のデータを読み込みたいとき",
     answer: ["JSON.parse"],
-    supplement: "例：\nconst user = JSON.parse(localStorage.getItem('user'))\nでオブジェクトとして取り出せる。\nlocalStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
+    supplement: "例：\nconst user = JSON.parse(\n  localStorage.getItem('user')\n)\nでオブジェクトとして取り出せる。\nlocalStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
   },
   // 通信
   {
