@@ -72,6 +72,7 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.8rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .question {
@@ -116,7 +117,8 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
 
 .submitButton:hover:not(:disabled) {
@@ -174,6 +176,7 @@
   border: 1px solid var(--border-warning);
   border-radius: 10px;
   padding: 1rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .supplementLabel {
@@ -202,7 +205,8 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .nextButton:hover {

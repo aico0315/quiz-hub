@@ -200,4 +200,128 @@ export const webApiQuestions: MethodQuestion[] = [
     answer: ["IntersectionObserver"],
     supplement: "new IntersectionObserver(callback).observe(el) のように使う。スクロールイベントより軽量で、画像の遅延読み込みや無限スクロールに使われる。",
   },
+
+  // ---- middle ----
+
+  // 非同期処理
+  {
+    id: "w-25",
+    level: "middle",
+    category: "非同期処理",
+    question: "複数のPromiseを並列実行して、全て完了したら結果をまとめて受け取りたいとき",
+    answer: ["Promise.all"],
+    supplement: "Promise.all([fetch(a), fetch(b)]).then(([resA, resB]) => ...) のように使う。1つでも失敗するとrejectになるので注意。全件成功が前提の並列処理に向いている。",
+  },
+  {
+    id: "w-26",
+    level: "middle",
+    category: "非同期処理",
+    question: "複数のPromiseを並列実行して、失敗しても全ての結果（成功・失敗）をまとめて受け取りたいとき",
+    answer: ["Promise.allSettled"],
+    supplement: "Promise.allSettled([...]) は各結果が { status: 'fulfilled', value } または { status: 'rejected', reason } の形で返る。一部失敗しても全件処理したいときに使う。",
+  },
+  {
+    id: "w-27",
+    level: "middle",
+    category: "非同期処理",
+    question: "fetchリクエストをタイムアウトやユーザー操作でキャンセルしたいとき",
+    answer: ["AbortController"],
+    supplement: "const controller = new AbortController(); fetch(url, { signal: controller.signal }); controller.abort() でキャンセル。Reactのクリーンアップ処理でよく使う。",
+  },
+  {
+    id: "w-28",
+    level: "middle",
+    category: "非同期処理",
+    question: "async関数内でfetchのエラー（ネットワークエラーやステータスエラー）を適切に処理したいとき",
+    answer: ["try/catch"],
+    supplement: "fetchはネットワークエラー時だけrejectする。404や500はrejectにならないので response.ok や response.status で確認し、必要なら手動でthrowする。",
+  },
+
+  // フォーム・ファイル
+  {
+    id: "w-29",
+    level: "middle",
+    category: "フォーム",
+    question: "画像やファイルを含むフォームデータをfetchでPOST送信したいとき",
+    answer: ["FormData"],
+    supplement: "const fd = new FormData(); fd.append('file', file); fetch(url, { method: 'POST', body: fd }) のように使う。Content-Typeは自動で multipart/form-data になる。",
+  },
+  {
+    id: "w-30",
+    level: "middle",
+    category: "フォーム",
+    question: "ユーザーがファイルを選択した時にその内容をブラウザ上で読み取りたいとき",
+    answer: ["FileReader"],
+    supplement: "const reader = new FileReader(); reader.onload = (e) => console.log(e.target.result); reader.readAsDataURL(file) のように使う。画像プレビューなどに使われる。",
+  },
+
+  // パフォーマンス
+  {
+    id: "w-31",
+    level: "middle",
+    category: "パフォーマンス",
+    question: "入力イベントなど頻繁に発火する処理を、最後の実行から一定時間後に1回だけ実行したいとき",
+    answer: ["debounce"],
+    supplement: "検索入力のAPIリクエスト抑制などで使う。setTimeout + clearTimeout で自前実装するか、lodashのdebounceを使う。入力が止まってから実行するイメージ。",
+  },
+  {
+    id: "w-32",
+    level: "middle",
+    category: "パフォーマンス",
+    question: "スクロールやリサイズなど頻繁なイベントを、一定間隔で間引いて実行したいとき",
+    answer: ["throttle"],
+    supplement: "debounceは最後の実行後に発火するが、throttleは一定間隔で必ず発火する。スクロール位置の追跡など「途中経過も必要」な場合に向いている。",
+  },
+  {
+    id: "w-33",
+    level: "middle",
+    category: "パフォーマンス",
+    question: "ブラウザの描画タイミングに合わせてアニメーションを実行したいとき",
+    answer: ["requestAnimationFrame"],
+    supplement: "requestAnimationFrame(callback) はブラウザが次の描画前にcallbackを呼ぶ。setIntervalより滑らかで、タブが非アクティブ時は自動停止する。",
+  },
+
+  // セキュリティ
+  {
+    id: "w-34",
+    level: "middle",
+    category: "セキュリティ",
+    question: "ユーザー入力をそのままinnerHTMLに入れると発生するセキュリティリスクは何？",
+    answer: ["XSS", "クロスサイトスクリプティング"],
+    supplement: "悪意あるスクリプトが埋め込まれ実行される攻撃。対策はtextContentを使う、または入力値をサニタイズ（無害化）すること。DOMPurifyなどのライブラリも有効。",
+  },
+  {
+    id: "w-35",
+    level: "middle",
+    category: "セキュリティ",
+    question: "別オリジンのAPIにfetchするとブラウザに弾かれることがある。この仕組みの名前は？",
+    answer: ["CORS", "オリジン間リソース共有"],
+    supplement: "Cross-Origin Resource Sharingの略。サーバー側がAccess-Control-Allow-Originヘッダーを返すことで許可できる。フロントだけでは解決できないのでサーバー側の対応が必要。",
+  },
+
+  // モダンAPI
+  {
+    id: "w-36",
+    level: "middle",
+    category: "通信",
+    question: "サーバーからリアルタイムにデータをストリームで受け取りたいとき（チャットやログなど）",
+    answer: ["EventSource"],
+    supplement: "new EventSource('/stream') で接続し、onmessageでデータを受け取る。WebSocketと違い一方向（サーバー→クライアント）だが実装がシンプル。SSE（Server-Sent Events）とも呼ばれる。",
+  },
+  {
+    id: "w-37",
+    level: "middle",
+    category: "ストレージ",
+    question: "localStorageより大容量で、オブジェクトやBlobもそのまま保存できるブラウザ内DBは？",
+    answer: ["IndexedDB"],
+    supplement: "非同期APIで大量データの保存が可能。直接扱うのは複雑なため、idbなどのラッパーライブラリがよく使われる。オフライン対応アプリのデータ永続化に向いている。",
+  },
+  {
+    id: "w-38",
+    level: "middle",
+    category: "DOM操作",
+    question: "DOM要素の追加・削除・属性変更を監視したいとき",
+    answer: ["MutationObserver"],
+    supplement: "new MutationObserver(callback).observe(target, { childList: true, subtree: true }) のように使う。サードパーティのDOMへの変更検知や、動的コンテンツの監視に使われる。",
+  },
 ];

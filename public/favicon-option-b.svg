@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- 円形の背景 -->
+  <circle cx="24" cy="24" r="24" fill="#7c3aed"/>
+  <!-- Q の文字（太め） -->
+  <text x="24" y="33" font-family="system-ui, sans-serif" font-size="32" font-weight="800" fill="white" text-anchor="middle">Q</text>
+  <!-- チェックマーク（小さく右下） -->
+  <circle cx="35" cy="35" r="8" fill="#a855f7"/>
+  <text x="35" y="39.5" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">✓</text>
+</svg>

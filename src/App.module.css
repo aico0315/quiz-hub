@@ -15,6 +15,7 @@
   padding: 0 1rem;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.07);
   z-index: 100;
 }
 
@@ -40,19 +41,52 @@
 }
 
 .themeToggle {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  background: transparent;
-  font-size: 1.1rem;
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 12px;
+  background: #f0b89a;
+  border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.15s;
+  transition: background 0.3s;
+  flex-shrink: 0;
 }
 
-.themeToggle:hover {
-  border-color: var(--text-accent);
+.themeToggle.darkMode {
+  background: #1e1e2e;
+  border: 1.5px solid #30304a;
+}
+
+.knob {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 3px;
+  left: 25px;
+  transition: left 0.25s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.darkMode .knob {
+  left: 3px;
+}
+
+.sunIcon {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+  color: white;
+  pointer-events: none;
+}
+
+.moonIcon {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  color: white;
+  pointer-events: none;
 }
