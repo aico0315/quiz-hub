@@ -175,7 +175,7 @@
   background: var(--bg-warning);
   border: 1px solid var(--border-warning);
   border-radius: 10px;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1.4rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -189,12 +189,17 @@
   margin-bottom: 0.4rem;
 }
 
-.supplement p {
-  margin: 0;
+.supplementLine {
+  margin: 0 0 0.85rem 0;
   font-size: 0.9rem;
   color: var(--text-body);
-  line-height: 1.9;
-  white-space: pre-wrap;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.supplementLine:last-child {
+  margin-bottom: 0;
 }
 
 .nextButton {

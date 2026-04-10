@@ -100,7 +100,9 @@ export default function MethodQuizScreen({ question, questionNumber, totalQuesti
           </div>
           <div className={styles.supplement}>
             <span className={styles.supplementLabel}>補足</span>
-            <p>{question.supplement}</p>
+            {question.supplement.split("\n").map((line, i) => (
+              <p key={i} className={styles.supplementLine}>{line}</p>
+            ))}
           </div>
           <button className={styles.nextButton} onClick={() => onNext(isCorrect)}>
             次の問題へ →
