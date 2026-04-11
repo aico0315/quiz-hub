@@ -1,11 +1,24 @@
 import { useState, useRef, useEffect } from "react";
-import type { MethodQuestion } from "../types";
+import type { MethodQuestion, QuizType, Level } from "../types";
 import styles from "./MethodQuizScreen.module.css";
+
+const QUIZ_TYPE_LABEL: Record<QuizType, string> = {
+  method: "メソッド問題",
+  webapi: "WEB API問題",
+  logic: "ロジック問題",
+};
+
+const LEVEL_LABEL: Record<Level, string> = {
+  junior: "Junior",
+  middle: "Middle",
+};
 
 interface Props {
   question: MethodQuestion;
   questionNumber: number;
   totalQuestions: number;
+  quizType: QuizType;
+  level: Level;
   onNext: (isCorrect: boolean) => void;
   onMenu: () => void;
 }
@@ -58,7 +71,7 @@ function judge(input: string, answers: string[]): boolean {
   return answers.some((answer) => normalized === answer);
 }
 
-export default function MethodQuizScreen({ question, questionNumber, totalQuestions, onNext, onMenu }: Props) {
+export default function MethodQuizScreen({ question, questionNumber, totalQuestions, quizType, level, onNext, onMenu }: Props) {
   const [input, setInput] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -96,6 +109,11 @@ export default function MethodQuizScreen({ question, questionNumber, totalQuesti
           レベル選択へ戻る
         </button>
         <span className={styles.category}>{question.category}</span>
+      </div>
+      <div className={styles.breadcrumb}>
+        <span>{QUIZ_TYPE_LABEL[quizType]}</span>
+        <span className={styles.breadcrumbSep}>›</span>
+        <span>{LEVEL_LABEL[level]}</span>
       </div>
       <div className={styles.progressRow}>
         <span className={styles.progress}>{questionNumber} / {totalQuestions}</span>

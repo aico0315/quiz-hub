@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import type { LogicQuestion } from "../types";
+import type { LogicQuestion, Level } from "../types";
 import { runCode, judge } from "../lib/runner";
 import styles from "./LogicQuizScreen.module.css";
+
+const LEVEL_LABEL: Record<Level, string> = {
+  junior: "Junior",
+  middle: "Middle",
+};
 
 interface Props {
   question: LogicQuestion;
   questionNumber: number;
   totalQuestions: number;
+  level: Level;
   onNext: (isCorrect: boolean) => void;
   onMenu: () => void;
 }
@@ -22,7 +28,7 @@ function renderExplanation(text: string) {
   });
 }
 
-export default function LogicQuizScreen({ question, questionNumber, totalQuestions, onNext, onMenu }: Props) {
+export default function LogicQuizScreen({ question, questionNumber, totalQuestions, level, onNext, onMenu }: Props) {
   const [code, setCode] = useState(question.starterCode);
   const [running, setRunning] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -81,6 +87,11 @@ export default function LogicQuizScreen({ question, questionNumber, totalQuestio
           レベル選択へ戻る
         </button>
         <span className={styles.category}>{question.category}</span>
+      </div>
+      <div className={styles.breadcrumb}>
+        <span>ロジック問題</span>
+        <span className={styles.breadcrumbSep}>›</span>
+        <span>{LEVEL_LABEL[level]}</span>
       </div>
       <div className={styles.progressRow}>
         <span className={styles.progress}>{questionNumber} / {totalQuestions}</span>

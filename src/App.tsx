@@ -177,6 +177,8 @@ export default function App() {
             question={methodQs[currentIndex]}
             questionNumber={currentIndex + 1}
             totalQuestions={methodQs.length}
+            quizType={quizType}
+            level={level}
             onNext={handleNext}
             onMenu={handleBackToLevel}
           />
@@ -186,6 +188,7 @@ export default function App() {
             question={logicQs[currentIndex]}
             questionNumber={currentIndex + 1}
             totalQuestions={logicQs.length}
+            level={level}
             onNext={handleNext}
             onMenu={handleBackToLevel}
           />
