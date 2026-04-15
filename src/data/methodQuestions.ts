@@ -8,7 +8,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の各要素を変換して新しい配列を作りたいとき",
     answer: ["map"],
-    supplement: "arr.map(x => x * 2) のように使う。元の配列は変更しない非破壊メソッド。",
+    supplement: "arr.map(x => x * 2) のように使う。元の配列はそのまま残り、変換後の新しい配列が返ってくる（非破壊メソッド）。\n\n【実務例】\n商品リストの価格に消費税をかけて、税込み価格の配列を作る。\n```js\nconst prices = [1000, 2000, 3000];\nconst taxed = prices.map(p => Math.round(p * 1.1));\n// [1100, 2200, 3300]\n```\nAPIから取得したユーザーデータから、名前だけの配列を作る。\n```js\nconst users = [{ id: 1, name: '田中' }, { id: 2, name: '佐藤' }];\nconst names = users.map(u => u.name);\n// ['田中', '佐藤']\n```",
   },
   {
     id: "m-2",
@@ -16,7 +16,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "条件に合う要素だけを取り出して新しい配列を作りたいとき",
     answer: ["filter"],
-    supplement: "arr.filter(x => x > 0) のように使う。条件を満たさない要素は除外される。",
+    supplement: "arr.filter(x => x > 0) のように使う。条件を満たさない要素は除外され、満たす要素だけの新しい配列が返ってくる。元の配列はそのまま残る（非破壊メソッド）。\n\n【実務例】\nECサイトで「在庫あり」の商品だけ表示する。\n```js\nconst products = [\n  { name: 'Tシャツ', stock: 5 },\n  { name: 'ジーンズ', stock: 0 },\n  { name: 'スニーカー', stock: 3 },\n];\nconst inStock = products.filter(p => p.stock > 0);\n// [{ name: 'Tシャツ', ... }, { name: 'スニーカー', ... }]\n```\nタスク管理アプリで「未完了」のタスクだけ絞り込む。\n```js\nconst tasks = [{ title: 'A', done: true }, { title: 'B', done: false }];\nconst remaining = tasks.filter(t => !t.done);\n```",
   },
   {
     id: "m-3",
@@ -24,7 +24,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の全要素に処理を行いたいが戻り値が不要なとき",
     answer: ["forEach"],
-    supplement: "arr.forEach(x => console.log(x)) のように使う。戻り値はundefined。",
+    supplement: "arr.forEach(x => console.log(x)) のように使う。各要素に順番に処理を実行するが、結果をまとめた配列は返ってこない（戻り値はundefined）。\n\n「変換後の配列がほしい」ときは map を使う。「処理を実行したいだけで、戻り値は不要」なときに forEach を使う。\n\n【実務例】\n取得したユーザー一覧を1件ずつ画面に追加する。\n```js\nconst users = ['田中', '佐藤', '鈴木'];\nusers.forEach(name => {\n  const li = document.createElement('li');\n  li.textContent = name;\n  ul.appendChild(li);\n});\n```",
   },
   {
     id: "m-4",
@@ -32,7 +32,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列に特定の値が含まれているか確認したいとき",
     answer: ["includes"],
-    supplement: "arr.includes(3) のように使う。trueかfalseを返す。NaNの検索にも使える。",
+    supplement: "arr.includes(3) のように使う。含まれていれば true、含まれていなければ false が返ってくる（真偽値を返すメソッド）。\n\n【実務例】\nユーザーの権限リスト（ロール）に 'admin' が入っているか確認して、管理メニューの表示を切り替える。\n```js\nconst roles = ['viewer', 'editor'];\nif (roles.includes('admin')) {\n  showAdminMenu();\n}\n```\n選択済みIDの一覧に特定のIDが含まれているか確認して、チェック状態を表示する。\n```js\nconst selectedIds = [1, 3, 5];\nconst isSelected = selectedIds.includes(item.id); // true or false\n```",
   },
   {
     id: "m-5",
@@ -40,7 +40,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の末尾に要素を追加したいとき",
     answer: ["push"],
-    supplement: "arr.push(4) のように使う。元の配列を変更する破壊メソッド。追加後の配列の長さを返す。",
+    supplement: "arr.push(4) のように使う。元の配列自体が書き換わる（破壊メソッド）点に注意。戻り値は追加後の配列の長さ。\n\n【実務例】\nToDoアプリで新しいタスクをリストに追加する。\n```js\nconst tasks = ['買い物', '掃除'];\ntasks.push('洗濯');\n// ['買い物', '掃除', '洗濯']\n```\nチャットアプリで新着メッセージをメッセージ一覧の末尾に追加する。\n```js\nmessages.push({ text: 'こんにちは', time: new Date() });\n```",
   },
   {
     id: "m-6",
@@ -48,7 +48,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の末尾から要素を取り出したいとき",
     answer: ["pop"],
-    supplement: "arr.pop() のように使う。取り出した要素を返す。元の配列を変更する。",
+    supplement: "arr.pop() のように使う。取り出した要素が戻り値として返ってくる。元の配列から末尾の要素が削除される（破壊メソッド）。\n\n【実務例】\n「元に戻す（Undo）」機能で、直前の操作を取り消す。操作の記録をスタック（積み上げ型の配列）に積んでおき、末尾（＝最後の操作）を取り出す。\n```js\nconst history = ['操作1', '操作2', '操作3'];\nconst lastAction = history.pop(); // '操作3' を取り出して削除\n// history は ['操作1', '操作2'] になる\n```",
   },
   {
     id: "m-7",
@@ -56,7 +56,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列を特定の文字で繋いで文字列にしたいとき",
     answer: ["join"],
-    supplement: "arr.join('-') のように使う。引数を省略すると ,(カンマ)で結合される。",
+    supplement: "arr.join('-') のように使う。引数に渡した文字が各要素の間に挿入されて1つの文字列になる（区切り文字）。引数を省略するとカンマ区切りになる。\n\n【実務例】\nパンくずリストのカテゴリ配列を「メンズ > トップス > セール」と表示する。\n```js\nconst breadcrumb = ['メンズ', 'トップス', 'セール'];\nconst label = breadcrumb.join(' > ');\n// 'メンズ > トップス > セール'\n```\nタグ配列をスラッシュ区切りで表示する。\n```js\nconst tags = ['JavaScript', 'React', 'TypeScript'];\nconst tagLabel = tags.join(' / ');\n// 'JavaScript / React / TypeScript'\n```",
   },
   {
     id: "m-8",
@@ -64,7 +64,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "条件に合う最初の要素を取り出したいとき",
     answer: ["find"],
-    supplement: "arr.find(x => x > 3) のように使う。見つからない場合はundefinedを返す。",
+    supplement: "arr.find(x => x > 3) のように使う。条件に合う最初の1件だけが戻り値として返ってくる。見つからない場合は undefined が返る。\n\n「条件に合う全件がほしい」ときは filter を使う。「特定の1件だけほしい」ときは find を使う。\n\n【実務例】\nユーザー一覧から、IDが一致する特定のユーザーを取り出す。\n```js\nconst users = [\n  { id: 1, name: '田中' },\n  { id: 2, name: '佐藤' },\n];\nconst user = users.find(u => u.id === 2);\n// { id: 2, name: '佐藤' }\n```",
   },
   {
     id: "m-9",
@@ -72,7 +72,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列内のある要素のインデックスを調べたいとき",
     answer: ["indexOf"],
-    supplement: "arr.indexOf(3) のように使う。見つからない場合は -1 を返す。",
+    supplement: "arr.indexOf(3) のように使う。その要素が配列の何番目にあるか（インデックス・0始まり）が返ってくる。見つからない場合は -1 が返る。\n\n【実務例】\n配列に同じ値を重複して追加しないようにチェックする。\n```js\nconst tags = ['React', 'TypeScript'];\nconst newTag = 'Vite';\nif (tags.indexOf(newTag) === -1) {\n  tags.push(newTag); // -1 = まだ入っていない → 追加する\n}\n```",
   },
   {
     id: "m-10",
@@ -80,7 +80,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の要素を1つの値にまとめたいとき（合計・結合など）",
     answer: ["reduce"],
-    supplement: "arr.reduce((acc, cur) => acc + cur, 0) のように使う。初期値を忘れずに。",
+    supplement: "arr.reduce((acc, cur) => acc + cur, 0) のように使う。acc（accumulator＝累積値）は「これまでの積み上げ結果」、cur（current＝現在値）は「今見ている要素」。最後の 0 は最初の acc の値（初期値）。\n\n【実務例】\nカートに入った商品の合計金額を計算する。\n```js\nconst cart = [\n  { name: 'Tシャツ', price: 2500 },\n  { name: 'ジーンズ', price: 6800 },\n];\nconst total = cart.reduce((acc, item) => acc + item.price, 0);\n// 9300\n```\n注文リストをステータスごとに分類したオブジェクトを作る。\n```js\nconst grouped = orders.reduce((acc, order) => {\n  acc[order.status].push(order.id);\n  return acc;\n}, { shipped: [], pending: [] });\n```",
   },
   {
     id: "m-11",
@@ -88,7 +88,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列内に条件を満たす要素が1つでもあるか確認したいとき",
     answer: ["some"],
-    supplement: "arr.some(x => x > 5) のように使う。1つでも条件を満たせばtrue。",
+    supplement: "arr.some(x => x > 5) のように使う。1つでも条件を満たす要素があれば true、1つもなければ false が返ってくる（真偽値を返すメソッド）。\n\n【実務例】\nカートに在庫切れの商品が1つでも含まれていれば、購入ボタンを押せないようにする。\n```js\nconst cart = [\n  { name: 'Tシャツ', stock: 3 },\n  { name: 'ジーンズ', stock: 0 },\n];\nconst hasOutOfStock = cart.some(item => item.stock === 0);\n// true → ボタンを disabled にする\n```",
   },
   {
     id: "m-12",
@@ -96,7 +96,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列内の全要素が条件を満たすか確認したいとき",
     answer: ["every"],
-    supplement: "arr.every(x => x > 0) のように使う。全て満たすときのみtrue。",
+    supplement: "arr.every(x => x > 0) のように使う。全要素が条件を満たせば true、1つでも満たさない要素があれば false が返ってくる（真偽値を返すメソッド）。\n\n【実務例】\nフォームの全項目が入力されているか確認して、送信ボタンを活性化（disabled を外す）する。\n```js\nconst fields = [name, email, message]; // 各入力欄の値\nconst canSubmit = fields.every(f => f.trim() !== '');\n// 全部入力済みのときだけ true → ボタンを活性化\n```",
   },
   {
     id: "m-13",
@@ -104,7 +104,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の一部を取り出して新しい配列を作りたいとき",
     answer: ["slice"],
-    supplement: "arr.slice(1, 3) のように使う。終了インデックスは含まれない。元の配列は変更しない。",
+    supplement: "arr.slice(1, 3) のように使う。開始インデックスから終了インデックスの手前まで取り出す（終了インデックスの要素は含まれない）。元の配列はそのまま残る（非破壊メソッド）。\n\n【実務例】\nブログのトップページに、最新記事を3件だけ表示する。\n```js\nconst articles = [記事1, 記事2, 記事3, 記事4, 記事5];\nconst latest = articles.slice(0, 3);\n// [記事1, 記事2, 記事3]\n```\nページネーションで、現在のページ分だけ取り出す。\n```js\nconst page = 2;\nconst perPage = 10;\nconst current = items.slice((page - 1) * perPage, page * perPage);\n```",
   },
   // 文字列メソッド
   {
@@ -113,7 +113,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列を特定の区切り文字で分割して配列にしたいとき",
     answer: ["split"],
-    supplement: "'a,b,c'.split(',') → ['a','b','c']。区切り文字は残らない。",
+    supplement: "'a,b,c'.split(',') → ['a','b','c'] のように使う。区切り文字自体は結果に含まれない。\n\n【実務例】\nデータベースにカンマ区切りで保存されているタグ文字列を、配列に変換してバッジとして表示する。\n```js\nconst tagString = 'React,TypeScript,Vite';\nconst tags = tagString.split(',');\n// ['React', 'TypeScript', 'Vite']\ntags.forEach(tag => renderBadge(tag));\n```",
   },
   {
     id: "m-15",
@@ -121,7 +121,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列の前後の空白を取り除きたいとき",
     answer: ["trim"],
-    supplement: "'  hello  '.trim() → 'hello'。trimStart()/trimEnd() で片側だけも可能。",
+    supplement: "'  hello  '.trim() → 'hello' のように使う。文字列の前後にある半角スペースや改行を取り除く（トリム）。片方だけ取り除きたいときは trimStart()（前だけ）/ trimEnd()（後ろだけ）が使える。\n\n【実務例】\nユーザーがフォームに入力した値に、コピペで気づかず入った前後のスペースを取り除いてからバリデーションする。\n```js\nconst input = '  user@example.com  ';\nconst email = input.trim();\n// 'user@example.com'\nif (!email.includes('@')) {\n  showError('メールアドレスが不正です');\n}\n```",
   },
   {
     id: "m-16",
@@ -129,7 +129,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列を全て小文字に変換したいとき",
     answer: ["toLowerCase"],
-    supplement: "'Hello'.toLowerCase() → 'hello'。ユーザー入力の正規化などに使う。",
+    supplement: "'Hello'.toLowerCase() → 'hello' のように使う。\n\n【実務例】\n検索機能で「JavaScript」「javascript」「JAVASCRIPT」をどれで入力しても同じようにヒットさせたい（大文字小文字を区別しない検索）。入力値と比較対象を両方小文字に変換（正規化）してから比べる。\n```js\nconst keyword = userInput.toLowerCase();\nconst results = items.filter(item =>\n  item.name.toLowerCase().includes(keyword)\n);\n```",
   },
   {
     id: "m-17",
@@ -137,7 +137,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列を全て大文字に変換したいとき",
     answer: ["toUpperCase"],
-    supplement: "'hello'.toUpperCase() → 'HELLO'。定数やラベルの表示などに使う。",
+    supplement: "'hello'.toUpperCase() → 'HELLO' のように使う。\n\n【実務例】\nステータスラベルを「ACTIVE」「PENDING」「SOLD OUT」のように大文字で統一して画面に表示する。データは小文字で管理されていても、見た目だけ大文字に変換できる。\n```js\nconst status = 'active';\nconst label = status.toUpperCase();\n// 'ACTIVE'\nbadge.textContent = label;\n```",
   },
   {
     id: "m-18",
@@ -145,7 +145,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列に特定の文字列が含まれているか確認したいとき",
     answer: ["includes"],
-    supplement: "'hello world'.includes('world') → true。大文字小文字は区別する。",
+    supplement: "'hello world'.includes('world') → true のように使う。含まれていれば true、含まれていなければ false が返ってくる（真偽値を返すメソッド）。大文字と小文字は区別される。\n\n【実務例】\n検索ボックスに入力したキーワードが商品名に含まれているかで、表示リストを絞り込む。\n```js\nconst keyword = searchInput.toLowerCase();\nconst filtered = products.filter(p =>\n  p.name.toLowerCase().includes(keyword)\n);\n```",
   },
   {
     id: "m-19",
@@ -153,7 +153,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列の一部を別の文字列に置き換えたいとき",
     answer: ["replace"],
-    supplement: "'hello'.replace('l', 'r') → 'herlo'。最初の1箇所のみ置換。全置換はreplaceAll。",
+    supplement: "'hello'.replace('l', 'r') → 'herlo' のように使う。最初に見つかった1箇所だけが置き換わる。全ての箇所を置き換えたいときは replaceAll を使う。\n\n【実務例】\nメールテンプレートのプレースホルダー（{{name}} のような仮の文字）を、実際のユーザー名に差し替える。\n```js\nconst template = 'こんにちは、{{name}}さん。';\nconst message = template.replace('{{name}}', user.name);\n// 'こんにちは、田中さん。'\n```\n全箇所を置き換えたい場合は replaceAll を使う。\n```js\nconst result = text.replaceAll('  ', ' '); // 二重スペースを全て1つに\n```",
   },
   {
     id: "m-20",
@@ -161,7 +161,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列の一部を取り出したいとき（開始・終了インデックスで指定）",
     answer: ["slice"],
-    supplement: "'hello'.slice(1, 3) → 'el'。配列のsliceと同様の使い方。",
+    supplement: "'hello'.slice(1, 3) → 'el' のように使う。配列の slice と同じ考え方で、開始インデックスから終了インデックスの手前までを取り出す。\n\n【実務例】\n商品説明文が長すぎるので、一覧ページでは先頭100文字だけ表示して省略する（文字列のトリミング）。\n```js\nconst description = '非常に長い商品説明文...';\nconst preview = description.length > 100\n  ? description.slice(0, 100) + '...'\n  : description;\n```",
   },
   // Objectメソッド
   {
@@ -170,7 +170,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Objectメソッド",
     question: "オブジェクトのキー一覧を配列で取得したいとき",
     answer: ["Object.keys"],
-    supplement: "Object.keys({a:1, b:2}) → ['a','b']。forEachやmapと組み合わせてよく使う。",
+    supplement: "Object.keys({a:1, b:2}) → ['a','b'] のように使う。オブジェクトのキー（プロパティ名）だけを配列として取り出せる。\n\n【実務例】\nユーザー情報オブジェクトのフィールド名を取得して、フォームの入力欄を動的に生成する。フィールドが増えても手動で追加しなくていいので便利。\n```js\nconst user = { name: '田中', email: 'tanaka@example.com', role: 'admin' };\nObject.keys(user).forEach(key => {\n  const input = document.createElement('input');\n  input.name = key;\n  input.value = user[key];\n  form.appendChild(input);\n});\n```",
   },
   {
     id: "m-22",
@@ -178,7 +178,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Objectメソッド",
     question: "オブジェクトの値一覧を配列で取得したいとき",
     answer: ["Object.values"],
-    supplement: "Object.values({a:1, b:2}) → [1,2]。合計を出したいときなどに使う。",
+    supplement: "Object.values({a:1, b:2}) → [1,2] のように使う。オブジェクトの値（バリュー）だけを配列として取り出せる。\n\n【実務例】\nカテゴリ別の売上をまとめたオブジェクトから、数値だけ取り出して合計を計算する。\n```js\nconst sales = { food: 50000, clothes: 30000, books: 12000 };\nconst total = Object.values(sales).reduce((acc, v) => acc + v, 0);\n// 92000\n```",
   },
   {
     id: "m-23",
@@ -186,7 +186,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Objectメソッド",
     question: "オブジェクトのキーと値のペアを配列で取得したいとき",
     answer: ["Object.entries"],
-    supplement: "Object.entries({a:1}) → [['a',1]]。map/filterと組み合わせてよく使う。",
+    supplement: "Object.entries({a:1}) → [['a',1]] のように使う。キーと値がセットになった配列（エントリー）が返ってくるので、両方を同時に使いたいときに便利。\n\n【実務例】\n設定オブジェクトをループして「項目名: 値」の形で画面に一覧表示する。\n```js\nconst settings = { 通知: true, ダークモード: false, 言語: '日本語' };\nObject.entries(settings).forEach(([key, value]) => {\n  console.log(`${key}: ${value}`);\n});\n// 通知: true\n// ダークモード: false\n// 言語: 日本語\n```",
   },
   {
     id: "m-24",
@@ -194,7 +194,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列から重複を取り除きたいとき",
     answer: ["Set"],
-    supplement: "[...new Set([1,1,2,3])] → [1,2,3]。Setはユニークな値のみを保持するデータ構造。",
+    supplement: "[...new Set([1,1,2,3])] → [1,2,3] のように使う。Set は「同じ値を2つ以上持てない」データ構造で、渡した配列の重複が自動的に取り除かれる。最後に [...] （スプレッド構文）で通常の配列に戻す。\n\n【実務例】\n複数の記事に付いているタグを全部集めて、重複なしの一覧を作る。\n```js\nconst articles = [\n  { tags: ['React', 'JavaScript'] },\n  { tags: ['React', 'TypeScript'] },\n];\nconst allTags = articles.flatMap(a => a.tags);\n// ['React', 'JavaScript', 'React', 'TypeScript']\nconst uniqueTags = [...new Set(allTags)];\n// ['React', 'JavaScript', 'TypeScript']\n```",
   },
   // middle
   {
@@ -203,7 +203,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の中の条件に合う要素のインデックスを取得したいとき",
     answer: ["findIndex"],
-    supplement: "arr.findIndex(x => x.id === 3) のように使う。見つからない場合は -1 を返す。",
+    supplement: "arr.findIndex(x => x.id === 3) のように使う。条件に合う最初の要素が「何番目にあるか（インデックス）」が返ってくる。見つからない場合は -1。\n\nfind は「要素そのもの」を返すが、findIndex は「何番目か」を返す。インデックスが分かると、配列の該当箇所だけを書き換えたり削除したりできる。\n\n【実務例】\nToDoリストで特定のIDのタスクを「完了済み」に書き換える（イミュータブルな更新パターン）。\n```js\nconst tasks = [\n  { id: 1, title: '買い物', done: false },\n  { id: 2, title: '掃除', done: false },\n];\nconst index = tasks.findIndex(t => t.id === 2);\nif (index !== -1) {\n  tasks[index].done = true;\n}\n```",
   },
   {
     id: "m-26",
@@ -211,7 +211,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "ネストした配列を1段階フラットにしたいとき",
     answer: ["flat"],
-    supplement: "[1,[2,[3]]].flat() → [1,2,[3]]。flat(Infinity) で全ての深さをフラットにできる。",
+    supplement: "[1,[2,[3]]].flat() → [1,2,[3]] のように使う。配列の中に配列が入っている（ネスト・入れ子）とき、1段階だけ外側に展開する（フラット化）。flat(Infinity) と書くと、何重にネストしていても全部フラットにできる。\n\n【実務例】\nカテゴリごとにグループ化された商品リストを、1つの配列にまとめて一括処理する。\n```js\nconst grouped = [\n  [{ name: 'Tシャツ' }, { name: 'ポロシャツ' }],\n  [{ name: 'ジーンズ' }, { name: 'チノパン' }],\n];\nconst allProducts = grouped.flat();\n// [{ name: 'Tシャツ' }, { name: 'ポロシャツ' }, ...]\n```",
   },
   {
     id: "m-27",
@@ -219,7 +219,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列を変換しながら同時にフラットにしたいとき",
     answer: ["flatMap"],
-    supplement: "arr.flatMap(x => [x, x*2]) のように使う。map + flat(1) と同じ結果。",
+    supplement: "arr.flatMap(x => [x, x*2]) のように使う。map で変換しながら、同時に1段階フラット化してくれる。map してから flat(1) するのと同じ結果（メソッドチェーンを1ステップ省ける）。\n\n【実務例】\n各ユーザーが持つ複数のタグをまとめて、全タグの一覧を作る。\n```js\nconst users = [\n  { name: '田中', tags: ['React', 'TypeScript'] },\n  { name: '佐藤', tags: ['Vue', 'TypeScript'] },\n];\nconst allTags = users.flatMap(u => u.tags);\n// ['React', 'TypeScript', 'Vue', 'TypeScript']\n```",
   },
   {
     id: "m-28",
@@ -227,7 +227,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Objectメソッド",
     question: "複数のオブジェクトを1つにまとめたいとき",
     answer: ["Object.assign"],
-    supplement: "Object.assign({}, obj1, obj2) のように使う。スプレッド構文 {...obj1, ...obj2} でも同様。",
+    supplement: "Object.assign({}, obj1, obj2) のように使う。後から渡したオブジェクトのキーが優先されるので、「デフォルト設定に上書きで追加する」イメージ（マージ）。スプレッド構文 {...obj1, ...obj2} でも同じことができ、最近のコードはこちらが主流。\n\n【実務例】\nアプリのデフォルト設定に、ユーザーが変更した設定だけ上書きでマージする。\n```js\nconst defaults = { theme: 'light', lang: 'ja', notifications: true };\nconst userSettings = { theme: 'dark' };\nconst settings = { ...defaults, ...userSettings };\n// { theme: 'dark', lang: 'ja', notifications: true }\n// theme だけ上書きされ、他はデフォルトのまま\n```",
   },
   {
     id: "m-29",
@@ -235,7 +235,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Promiseメソッド",
     question: "複数のPromiseを並列に実行して全て終わるまで待ちたいとき",
     answer: ["Promise.all"],
-    supplement: "Promise.all([p1, p2, p3]).then(...) のように使う。1つでも失敗するとrejectになる。",
+    supplement: "Promise.all([p1, p2, p3]).then(...) のように使う。全て完了したら結果がまとめて返ってくる。1つでも失敗（reject）すると、全体が失敗扱いになる点に注意。\n\n順番に1つずつ await するより、まとめて並列実行した方が速い。「全部成功することが前提」の場面で使う。\n\n【実務例】\nユーザー情報・注文履歴・お気に入りリストを同時に取得して、画面を一気に表示する。\n```js\nconst [user, orders, favorites] = await Promise.all([\n  fetchUser(id),\n  fetchOrders(id),\n  fetchFavorites(id),\n]);\n// 順番に await すると3倍かかるが、並列実行すれば1つ分の時間で済む\n```",
   },
   {
     id: "m-30",
@@ -243,6 +243,6 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Promiseメソッド",
     question: "複数のPromiseを並列に実行して最初に完了したものだけ取得したいとき",
     answer: ["Promise.race"],
-    supplement: "Promise.race([p1, p2]) のように使う。最初にresolve/rejectしたPromiseの結果になる。",
+    supplement: "Promise.race([p1, p2]) のように使う。一番最初に完了（resolve）または失敗（reject）したPromiseの結果だけが返ってくる。名前の通り「レース」のイメージ。\n\n【実務例】\nAPIへのリクエストにタイムアウトを設ける。「5秒以内に返ってこなければエラー」という処理が作れる。\n```js\nconst timeout = new Promise((_, reject) =>\n  setTimeout(() => reject(new Error('タイムアウト')), 5000)\n);\ntry {\n  const data = await Promise.race([fetchData(), timeout]);\n} catch (e) {\n  console.error(e.message); // 5秒以内に返ってこなければ 'タイムアウト'\n}\n```",
   },
 ];

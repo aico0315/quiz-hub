@@ -27,41 +27,35 @@ function normalize(str: string): string {
   return str.replace(/　/g, " ").trim();
 }
 
-const CODE_START = /^(const |let |var |new |await |fetch|try|catch|\}|\{|if |return |reader\.|es\.|fd\.|el\.|btn\.|form\.|parent\.|ul\.|  )/;
-
-function isCodeLine(line: string): boolean {
-  return CODE_START.test(line);
-}
-
 function renderSupplement(text: string) {
   const lines = text.split("\n");
   const result: React.ReactNode[] = [];
   let codeBuffer: string[] = [];
-
-  const flushCode = (key: number) => {
-    if (codeBuffer.length > 0) {
-      result.push(
-        <pre key={`code-${key}`} className={styles.supplementCode}>
-          <code>{codeBuffer.join("\n")}</code>
-        </pre>
-      );
-      codeBuffer = [];
-    }
-  };
+  let inCode = false;
+  let keyCounter = 0;
 
   lines.forEach((line, i) => {
-    if (isCodeLine(line)) {
-      codeBuffer.push(line);
-    } else {
-      flushCode(i);
-      if (line.trim()) {
+    if (line.startsWith("```")) {
+      if (!inCode) {
+        inCode = true;
+        codeBuffer = [];
+      } else {
+        inCode = false;
         result.push(
-          <p key={i} className={styles.supplementLine}>{line}</p>
+          <pre key={`code-${keyCounter++}`} className={styles.supplementCode}>
+            <code>{codeBuffer.join("\n")}</code>
+          </pre>
         );
+        codeBuffer = [];
       }
+    } else if (inCode) {
+      codeBuffer.push(line);
+    } else if (line.trim()) {
+      result.push(
+        <p key={i} className={styles.supplementLine}>{line}</p>
+      );
     }
   });
-  flushCode(lines.length);
 
   return result;
 }

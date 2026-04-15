@@ -8,7 +8,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "CSSセレクターで指定した最初の要素を取得したいとき",
     answer: ["document.querySelector"],
-    supplement: "例：document.querySelector('.btn') でクラス名が btn の最初の要素を取得できる。\n見つからない場合は null を返すので、操作前に if (el) で確認するのが安全。\n複数まとめて取得したい場合は querySelectorAll を使う。",
+    supplement: "例：document.querySelector('.btn') でクラス名が btn の最初の要素を取得できる。\n見つからない場合は null が返るので、操作する前に if (el) で確認するのが安全（nullチェック）。\n複数まとめて取得したい場合は querySelectorAll を使う。\n\n【実務例】\nボタンを取得してクリックイベントを登録する。\n```js\nconst btn = document.querySelector('.submit-btn');\nif (btn) {\n  btn.addEventListener('click', handleSubmit);\n}\n```",
   },
   {
     id: "w-2",
@@ -16,7 +16,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "CSSセレクターにマッチする全ての要素を取得したいとき",
     answer: ["document.querySelectorAll"],
-    supplement: "例：document.querySelectorAll('li') でリストアイテムを全件取得できる。\n返り値は NodeList なので forEach で回せる。\n「全てのカードにイベントを登録したい」という場面でよく使う。",
+    supplement: "例：document.querySelectorAll('li') でリストアイテムを全件取得できる。\n返り値は NodeList（配列に似たリスト）なので forEach で回せる。ただし map や filter は使えないので、配列に変換したい場合は [...list] とスプレッド構文を使う。\n\n【実務例】\n全てのカードにクリックイベントを一括登録する。\n```js\nconst cards = document.querySelectorAll('.card');\ncards.forEach(card => {\n  card.addEventListener('click', handleCardClick);\n});\n```",
   },
   {
     id: "w-3",
@@ -24,7 +24,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "id属性で特定の要素を取得したいとき",
     answer: ["document.getElementById"],
-    supplement: "例：document.getElementById('submit-btn') で id が submit-btn の要素を取得できる。\nquerySelector('#submit-btn') と同じだが、こちらの方が高速。\n# は不要なので注意。",
+    supplement: "例：document.getElementById('submit-btn') で id が submit-btn の要素を取得できる。\nquerySelector('#submit-btn') と同じ結果だが、こちらの方が処理が速い。\n引数に # は不要なので注意（querySelector と違う点）。\n\n【実務例】\nフォームの送信ボタンを取得して操作する。\n```js\nconst btn = document.getElementById('submit-btn');\nbtn.disabled = true; // ボタンを押せない状態にする\n```",
   },
   {
     id: "w-4",
@@ -32,7 +32,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素のテキストを書き換えたいとき（HTMLタグを含めない）",
     answer: ["textContent"],
-    supplement: "例：el.textContent = '読み込み中...' でボタンのテキストを動的に変えられる。\ninnerHTML と違い HTML タグをそのまま文字として表示するので、ユーザー入力を表示する際は textContent の方が安全。",
+    supplement: "例：el.textContent = '読み込み中...' で要素のテキストを動的に変えられる。\ninnerHTML と違い HTML タグをそのまま文字として表示するので、ユーザーが入力した値を表示する際は textContent の方が安全（XSS対策）。\n\n【実務例】\nボタンのテキストを状態に応じて切り替える。\n```js\nconst btn = document.querySelector('.submit-btn');\nbtn.textContent = '送信中...';\n// 完了後\nbtn.textContent = '送信する';\n```",
   },
   {
     id: "w-5",
@@ -40,7 +40,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素にクラスを追加・削除・トグルしたいとき",
     answer: ["classList"],
-    supplement: "例：el.classList.add('active') でメニューを開いた状態にする。\nel.classList.toggle('open') でアコーディオンの開閉を切り替えるといった使い方が一般的。\nclassName を直接書き換えると既存のクラスが消えるので classList の方が安全。",
+    supplement: "例：el.classList.add('active') でクラスを追加できる。\nclassName を直接書き換えると既存のクラスが全て消えてしまうので、classList を使う方が安全。\n\n主なメソッド：\n- classList.add('クラス名') → 追加\n- classList.remove('クラス名') → 削除\n- classList.toggle('クラス名') → あれば削除、なければ追加\n\n【実務例】\nアコーディオンの開閉をトグルで切り替える。\n```js\nconst menu = document.querySelector('.menu');\nbtn.addEventListener('click', () => {\n  menu.classList.toggle('open');\n});\n```",
   },
   {
     id: "w-6",
@@ -48,7 +48,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素の属性値を取得したいとき",
     answer: ["getAttribute"],
-    supplement: "例：el.getAttribute('href') でリンク先URLを取得したり、el.getAttribute('data-id') でカスタム属性の値を取り出したりできる。\n属性を設定したい場合は setAttribute('disabled', 'true') のように使う。",
+    supplement: "例：el.getAttribute('href') でリンク先URLを取得できる。\n属性を設定したい場合は setAttribute('disabled', 'true') のように使う。\n\n【実務例】\nカスタムデータ属性（data-*）からIDを取り出して処理する。\n```js\nconst card = document.querySelector('.card');\nconst id = card.getAttribute('data-id'); // '42'\n// 取得したIDを使ってAPIを叩くなど\nfetchProduct(id);\n```",
   },
   {
     id: "w-7",
@@ -56,7 +56,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "新しいHTML要素を作成したいとき",
     answer: ["document.createElement"],
-    supplement: "例：要素を作って中身を設定してから親要素に追加する流れが基本。\nconst li = document.createElement('li')\nli.textContent = '新しい項目'\nul.appendChild(li)\n作っただけでは画面に表示されない点に注意。",
+    supplement: "例：要素を作って中身を設定してから親要素に追加する流れが基本。\n作っただけでは画面に表示されない点に注意。appendChild などで DOM に追加して初めて表示される。\n\n【実務例】\nToDoアプリで新しいタスクをリストに追加する。\n```js\nconst li = document.createElement('li');\nli.textContent = '新しいタスク';\nli.classList.add('task-item');\nul.appendChild(li);\n```",
   },
   {
     id: "w-8",
@@ -64,7 +64,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "親要素の末尾に子要素を追加したいとき",
     answer: ["appendChild"],
-    supplement: "例：ul.appendChild(li) でリストの末尾に新しい項目を追加できる。\nToDoアプリでタスクを追加する場面などでよく使う。\nすでにDOMにある要素を渡すと「コピー」ではなく「移動」になるので注意。",
+    supplement: "例：ul.appendChild(li) でリストの末尾に新しい項目を追加できる。\nすでにDOMにある要素を渡すと「コピー」ではなく「移動」になるので注意。\n\n【実務例】\nコメント欄に新しいコメントを追加する。\n```js\nconst comment = document.createElement('div');\ncomment.className = 'comment';\ncomment.textContent = newCommentText;\ndocument.querySelector('.comments').appendChild(comment);\n```",
   },
   // イベント
   {
@@ -73,7 +73,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "ボタンのクリックやフォームの入力などのイベントを監視したいとき",
     answer: ["addEventListener"],
-    supplement: "例：\nbtn.addEventListener('click', () => alert('クリックされた'))\nでボタンのクリックを検知できる。\n同じ要素に複数のイベントを登録できるのが強み。\ninput イベントで入力のたびにリアルタイム検索するといった使い方もよくある。",
+    supplement: "例：btn.addEventListener('click', () => alert('クリックされた')) でボタンのクリックを検知できる。\n同じ要素に複数のイベントを登録できるのが強み（onclick プロパティは1つしか登録できない）。\n\n【実務例】\n検索ボックスへの入力のたびにリアルタイムで絞り込みを実行する。\n```js\nconst searchInput = document.querySelector('#search');\nsearchInput.addEventListener('input', (e) => {\n  filterItems(e.target.value);\n});\n```",
   },
   {
     id: "w-10",
@@ -81,7 +81,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "登録済みのイベントリスナーを解除したいとき",
     answer: ["removeEventListener"],
-    supplement: "例：btn.removeEventListener('click', handleClick) のように使う。\nポイントは addEventListener に渡した関数と同じ参照を渡すこと。\n() => {} のような匿名関数では解除できないため、関数を変数に入れておくのがコツ。",
+    supplement: "例：btn.removeEventListener('click', handleClick) のように使う。\nポイントは addEventListener に渡した関数と同じ参照（変数）を渡すこと。\n() => {} のような匿名関数はその場で新しく作られるので、解除できない。関数を変数に入れておくのがコツ。\n\n【実務例】\nモーダルを閉じたときにキーボードイベントの監視を止める。\n```js\nfunction handleKeyDown(e) {\n  if (e.key === 'Escape') closeModal();\n}\n// モーダルを開いたとき登録\ndocument.addEventListener('keydown', handleKeyDown);\n// モーダルを閉じたとき解除\ndocument.removeEventListener('keydown', handleKeyDown);\n```",
   },
   {
     id: "w-11",
@@ -89,7 +89,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "フォームのsubmitなど、デフォルトのブラウザ動作をキャンセルしたいとき",
     answer: ["preventDefault"],
-    supplement: "例：\nform.addEventListener('submit', (e) => {\n  e.preventDefault()\n  // ここで独自の送信処理\n})\nこれをしないとフォーム送信時にページがリロードされてしまう。\nリンクのデフォルト遷移をキャンセルする場合にも使う。",
+    supplement: "例：フォームの submit イベントでこれを呼ばないと、ページがリロードされてしまう。\nリンクのデフォルト遷移をキャンセルする場面にも使う。\n\n【実務例】\nフォームの送信をJavaScriptで制御する（ページリロードさせない）。\n```js\nform.addEventListener('submit', (e) => {\n  e.preventDefault(); // ブラウザのデフォルト動作（リロード）をキャンセル\n  const data = new FormData(form);\n  sendToServer(data); // 独自の送信処理\n});\n```",
   },
   // ストレージ
   {
@@ -98,7 +98,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "ブラウザを閉じても残るデータをキーバリューで保存したいとき",
     answer: ["localStorage"],
-    supplement: "例：ダークモード設定の保存と取り出し。\nlocalStorage.setItem('theme', 'dark')\nlocalStorage.getItem('theme') // => 'dark'\nオブジェクトを保存したい場合は JSON.stringify() で文字列に変換してから保存する。",
+    supplement: "例：ブラウザを閉じても消えない（永続的な）保存場所。\nオブジェクトや配列を保存したい場合は JSON.stringify() で文字列に変換してから保存し、取り出すときは JSON.parse() で戻す。\n\n【実務例】\nダークモード設定を保存して、次回アクセス時も維持する。\n```js\n// 保存\nlocalStorage.setItem('theme', 'dark');\n// 取り出し\nconst theme = localStorage.getItem('theme'); // 'dark'\n// 削除\nlocalStorage.removeItem('theme');\n```",
   },
   {
     id: "w-13",
@@ -106,7 +106,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "タブを閉じたら消えるセッション単位のデータを保存したいとき",
     answer: ["sessionStorage"],
-    supplement: "例：フォームの途中入力内容を sessionStorage に保存しておき、ページ遷移後に復元するといった使い方ができる。\nタブを閉じると自動的に消えるので、ログイン中だけ使う一時データに向いている。\nAPIは localStorage と全く同じ。",
+    supplement: "例：タブを閉じると自動的に消えるので、「そのセッションだけ使う一時データ」に向いている。\nAPIは localStorage と全く同じ（setItem / getItem / removeItem）。\n\n【実務例】\n複数ページにまたがるフォームの入力内容を一時保存して、ページ遷移後に復元する。\n```js\n// 入力のたびに保存\ninput.addEventListener('input', () => {\n  sessionStorage.setItem('draft', input.value);\n});\n// ページ読み込み時に復元\nconst draft = sessionStorage.getItem('draft');\nif (draft) input.value = draft;\n```",
   },
   {
     id: "w-14",
@@ -114,7 +114,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "localStorageからJSON形式のデータを読み込みたいとき",
     answer: ["JSON.parse"],
-    supplement: "例：\nconst user = JSON.parse(localStorage.getItem('user'))\nでオブジェクトとして取り出せる。\nlocalStorage は文字列しか保存できないため、保存時は JSON.stringify()、取り出し時は JSON.parse() がセットになる。",
+    supplement: "例：localStorage は文字列しか保存できないため、オブジェクトや配列は保存時に JSON.stringify()（オブジェクト→文字列）、取り出し時に JSON.parse()（文字列→オブジェクト）がセットになる。\n\n【実務例】\nカート情報（オブジェクトの配列）を保存・取り出しする。\n```js\n// 保存：オブジェクトを文字列に変換してから保存\nconst cart = [{ id: 1, name: 'Tシャツ', qty: 2 }];\nlocalStorage.setItem('cart', JSON.stringify(cart));\n\n// 取り出し：文字列をオブジェクトに戻す\nconst saved = JSON.parse(localStorage.getItem('cart'));\n```",
   },
   // 通信
   {
@@ -123,7 +123,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "外部APIにHTTPリクエストを送りたいとき",
     answer: ["fetch"],
-    supplement: "例：\nfetch('https://api.example.com/users')\n  .then(r => r.json())\n  .then(data => console.log(data))\n404や500のエラーでも Promise は reject にならないので、response.ok で成功確認するのがよい。",
+    supplement: "例：URLを渡すだけで簡単にリクエストが送れる。\nPromise を返すので await で結果を待つ。\n注意点として、404や500のエラーでも Promise は失敗（reject）にならない。成功かどうかは response.ok で確認する必要がある。\n\n【実務例】\nAPIからユーザー一覧を取得して表示する。\n```js\nconst response = await fetch('https://api.example.com/users');\nif (!response.ok) throw new Error('取得に失敗しました');\nconst users = await response.json();\n```",
   },
   {
     id: "w-16",
@@ -131,7 +131,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "fetchのレスポンスをJSONとして取得したいとき",
     answer: ["json"],
-    supplement: "例：\nconst data = await response.json()\nでAPIのレスポンスをオブジェクトとして受け取れる。\nPromise を返す非同期処理なので await が必要。\nテキストで受け取りたい場合は response.text()、バイナリは response.blob() を使う。",
+    supplement: "例：fetch のレスポンスはそのままでは使えない。response.json() を呼ぶことで、受け取ったJSONテキストをJavaScriptのオブジェクトに変換してくれる。\nPromise を返す非同期処理なので await が必要。\nテキストで受け取りたい場合は response.text()、画像などバイナリデータは response.blob() を使う。\n\n【実務例】\nAPIから商品情報を取得してオブジェクトとして使う。\n```js\nconst response = await fetch('/api/products/1');\nconst product = await response.json();\n// { id: 1, name: 'Tシャツ', price: 2500 }\nconsole.log(product.name); // 'Tシャツ'\n```",
   },
   // タイマー
   {
@@ -140,7 +140,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "タイマー",
     question: "一定時間後に1度だけ処理を実行したいとき",
     answer: ["setTimeout"],
-    supplement: "例：3秒後にメッセージを消す。\nsetTimeout(() => setMessage(''), 3000)\nミリ秒単位で指定する。\nキャンセルしたい場合は const id = setTimeout(...) で受け取り clearTimeout(id) で止める。",
+    supplement: "例：時間はミリ秒単位で指定する（1000 = 1秒）。\nキャンセルしたい場合は const id = setTimeout(...) で受け取り、clearTimeout(id) で止める。\n\n【実務例】\n「コピーしました」などの通知を3秒後に自動で消す。\n```js\nsetMessage('コピーしました！');\nsetTimeout(() => {\n  setMessage(''); // 3秒後にメッセージを消す\n}, 3000);\n```",
   },
   {
     id: "w-18",
@@ -148,7 +148,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "タイマー",
     question: "一定時間ごとに繰り返し処理を実行したいとき",
     answer: ["setInterval"],
-    supplement: "例：1秒ごとにカウントアップする。\nconst id = setInterval(() => setCount(c => c + 1), 1000)\n止めたい場合は clearInterval(id) を呼ぶ。\n止め忘れるとバックグラウンドで処理が走り続けるので注意。",
+    supplement: "例：時間はミリ秒単位で指定する（1000 = 1秒）。\n止め忘れるとバックグラウンドでずっと処理が走り続けるので、不要になったら clearInterval(id) で止める。\n\n【実務例】\nカウントダウンタイマーを1秒ごとに更新する。\n```js\nconst id = setInterval(() => {\n  setCount(c => c - 1);\n  if (count <= 0) clearInterval(id); // 0になったら止める\n}, 1000);\n```",
   },
   // ナビゲーション
   {
@@ -157,7 +157,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ナビゲーション",
     question: "SPAでURLを変更しながらページを再読み込みせずに履歴を追加したいとき",
     answer: ["history.pushState"],
-    supplement: "例：history.pushState({}, '', '/about') でページをリロードせずに URL を /about に変更できる。\nReact Router や Next.js のルーティングもこの仕組みを使っている。\nブラウザの「戻る」ボタンも機能する。",
+    supplement: "例：history.pushState({}, '', '/about') でページをリロードせずに URL を /about に変更できる。\nReact Router や Next.js のルーティングも内部でこの仕組みを使っている。\nブラウザの「戻る」ボタンも機能する。\nSPA（シングルページアプリケーション）＝ページを丸ごと読み込まず、必要な部分だけを更新するアプリの仕組み。\n\n【実務例】\nタブ切り替えのたびにURLを変えて、ブラウザの戻るボタンで元のタブに戻れるようにする。\n```js\nfunction switchTab(tabName) {\n  history.pushState({}, '', `?tab=${tabName}`);\n  showTab(tabName);\n}\n```",
   },
   {
     id: "w-20",
@@ -165,7 +165,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ナビゲーション",
     question: "現在のURLのクエリパラメータを取得・操作したいとき",
     answer: ["URLSearchParams"],
-    supplement: "例：URL が /search?q=javascript&page=2 のとき\nnew URLSearchParams(location.search).get('q') // => 'javascript'\n検索フィルターやページネーションの実装でよく使う。",
+    supplement: "例：URL の ? 以降の部分（クエリパラメータ）を簡単に読み書きできる。\n\n【実務例】\n検索フィルターやページネーションをURLに反映させる。\n```js\n// URL が /search?q=javascript&page=2 のとき\nconst params = new URLSearchParams(location.search);\nconst keyword = params.get('q');   // 'javascript'\nconst page = params.get('page');   // '2'\n```",
   },
   // その他
   {
@@ -174,7 +174,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ウィンドウ",
     question: "ページの一番上までスクロールしたいとき",
     answer: ["window.scrollTo"],
-    supplement: "例：window.scrollTo({ top: 0, behavior: 'smooth' }) で「トップへ戻る」ボタンの実装ができる。\nbehavior: 'smooth' をつけるとなめらかにスクロールする。\n{ top: 0, behavior: 'instant' } にすると即座に移動する。",
+    supplement: "例：window.scrollTo({ top: 0, behavior: 'smooth' }) でスムーズにトップまでスクロールできる。\nbehavior: 'smooth' をつけるとなめらかにスクロールし、'instant' にすると即座に移動する。\n\n【実務例】\n「トップへ戻る」ボタンを実装する。\n```js\nconst topBtn = document.querySelector('.back-to-top');\ntopBtn.addEventListener('click', () => {\n  window.scrollTo({ top: 0, behavior: 'smooth' });\n});\n```",
   },
   {
     id: "w-22",
@@ -182,7 +182,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ウィンドウ",
     question: "テキストをクリップボードにコピーしたいとき",
     answer: ["navigator.clipboard.writeText"],
-    supplement: "例：await navigator.clipboard.writeText(url) で招待URLをワンクリックでコピーするボタンが実装できる。\nPromise を返すので await が必要。\nHTTP 環境では動作しないため、開発時も localhost で確認する。",
+    supplement: "例：Promise を返すので await が必要。\nHTTP 環境では動作しないため、開発時も localhost で確認すること（セキュリティ上の制限）。\n\n【実務例】\n招待URLをワンクリックでコピーするボタンを実装する。\n```js\ncopyBtn.addEventListener('click', async () => {\n  await navigator.clipboard.writeText(inviteUrl);\n  copyBtn.textContent = 'コピーしました！';\n  setTimeout(() => copyBtn.textContent = 'コピー', 2000);\n});\n```",
   },
   {
     id: "w-23",
@@ -190,7 +190,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "要素のスクロール位置やサイズ情報（幅・高さ・座標）を取得したいとき",
     answer: ["getBoundingClientRect"],
-    supplement: "例：const rect = el.getBoundingClientRect() で rect.top / rect.left / rect.width / rect.height が取れる。\n「要素が画面内に見えているか」の判定や、ツールチップの表示位置計算によく使われる。",
+    supplement: "例：const rect = el.getBoundingClientRect() で要素の位置やサイズ情報がまとめて取れる。\nrect.top / rect.left / rect.width / rect.height などのプロパティで各値を参照できる。\n\n【実務例】\nツールチップ（ホバーで出る説明）の表示位置を、対象要素の座標を基準に計算する。\n```js\nconst rect = targetEl.getBoundingClientRect();\ntooltip.style.top = rect.bottom + 'px';\ntooltip.style.left = rect.left + 'px';\n```",
   },
   {
     id: "w-24",
@@ -198,7 +198,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "イベント",
     question: "要素がビューポートに入ったタイミングを検知したいとき（遅延読み込みなど）",
     answer: ["IntersectionObserver"],
-    supplement: "例：画像がスクロールで見えたタイミングで読み込む「遅延読み込み」の実装。\nnew IntersectionObserver((entries) => {\n  if (entries[0].isIntersecting) loadImage()\n}).observe(imgEl)\nscroll イベントより処理が軽い。",
+    supplement: "例：scroll イベントで判定する方法より処理が軽い（パフォーマンスが良い）。\nビューポート＝今画面に見えている範囲のこと。\n\n【実務例】\n画像が画面内に入ったタイミングで初めて読み込む（遅延読み込み＝Lazy Load）。\n```js\nconst observer = new IntersectionObserver((entries) => {\n  entries.forEach(entry => {\n    if (entry.isIntersecting) {\n      const img = entry.target;\n      img.src = img.dataset.src; // 画面に入ったら src をセット\n      observer.unobserve(img);   // 一度読み込んだら監視を止める\n    }\n  });\n});\ndocument.querySelectorAll('img[data-src]').forEach(img => {\n  observer.observe(img);\n});\n```",
   },
 
   // ---- middle ----
@@ -210,7 +210,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "複数のPromiseを並列実行して、全て完了したら結果をまとめて受け取りたいとき",
     answer: ["Promise.all"],
-    supplement: "例：ユーザー情報と投稿を同時に取得する。\nconst [user, posts] = await Promise.all([fetchUser(id), fetchPosts(id)])\n順番に fetch するより速い。\nただし1つでも失敗すると全体が reject になるので、全件成功が前提の場面で使う。",
+    supplement: "例：全て完了したら結果が配列で返ってくる。1つでも失敗（reject）すると全体が失敗扱いになる。\n全部成功することが前提の場面で使う。\n\n【実務例】\nユーザー情報と投稿を同時に取得して、どちらも揃ってから画面に表示する。\n```js\nconst [user, posts] = await Promise.all([\n  fetchUser(id),\n  fetchPosts(id),\n]);\n// 順番に取得するより最も遅い1件分の時間で完了できる\n```",
   },
   {
     id: "w-26",
@@ -218,7 +218,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "複数のPromiseを並列実行して、失敗しても全ての結果（成功・失敗）をまとめて受け取りたいとき",
     answer: ["Promise.allSettled"],
-    supplement: "例：複数の外部APIに同時にリクエストし、失敗したものだけ再試行したい場合に使う。\n各結果が { status: 'fulfilled', value } または { status: 'rejected', reason } の形で返るので、status で成否を判定できる。",
+    supplement: "Promise.all と違い、1つが失敗しても他の結果が無駄にならない。\n各結果が { status: 'fulfilled', value } または { status: 'rejected', reason } の形で返ってくるので、status で成否を判定できる（settled＝決着がついた、という意味）。\n\n【実務例】\n複数の外部APIに同時にリクエストして、失敗したものだけ再試行する。\n```js\nconst results = await Promise.allSettled([\n  fetchFromApiA(),\n  fetchFromApiB(),\n  fetchFromApiC(),\n]);\nresults.forEach((result, i) => {\n  if (result.status === 'rejected') {\n    console.log(`API${i + 1} が失敗:`, result.reason);\n    retry(i); // 失敗したものだけ再試行\n  }\n});\n```",
   },
   {
     id: "w-27",
@@ -226,7 +226,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "fetchリクエストをタイムアウトやユーザー操作でキャンセルしたいとき",
     answer: ["AbortController"],
-    supplement: "例：Reactで useEffect 内で fetch する場合、クリーンアップ関数で controller.abort() を呼ぶとコンポーネントがアンマウントされたときにリクエストをキャンセルできる。\n画面遷移時のメモリリーク防止に役立つ。",
+    supplement: "AbortController でキャンセル信号（AbortSignal）を作り、fetch の signal オプションに渡す。controller.abort() を呼ぶとリクエストがキャンセルされる。\n\n【実務例】\nReactで useEffect 内で fetch するとき、コンポーネントが画面から消えたタイミングでリクエストをキャンセルする。これをしないと、画面遷移後に古いデータが届いてエラーになることがある（メモリリーク）。\n```js\nuseEffect(() => {\n  const controller = new AbortController();\n\n  fetch('/api/data', { signal: controller.signal })\n    .then(r => r.json())\n    .then(data => setData(data))\n    .catch(err => {\n      if (err.name === 'AbortError') return; // キャンセルは無視\n      console.error(err);\n    });\n\n  return () => controller.abort(); // コンポーネントが消えたらキャンセル\n}, []);\n```",
   },
   {
     id: "w-28",
@@ -234,7 +234,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "非同期処理",
     question: "async関数内でfetchのエラー（ネットワークエラーやステータスエラー）を適切に処理したいとき",
     answer: ["try/catch"],
-    supplement: "例：\ntry {\n  const res = await fetch(url)\n  if (!res.ok) throw new Error('取得失敗')\n  const data = await res.json()\n} catch (e) {\n  setError(e.message)\n}\nfetch は404や500でも reject しないため、response.ok の確認が必要。",
+    supplement: "fetch は404や500のレスポンスでも Promise が失敗（reject）にならない。そのため response.ok で成否を確認して、失敗なら自分でエラーを throw する必要がある。\n\n【実務例】\nAPIからデータを取得して、失敗時はエラーメッセージを表示する。\n```js\ntry {\n  const res = await fetch(url);\n  if (!res.ok) throw new Error(`エラー: ${res.status}`);\n  const data = await res.json();\n  setData(data);\n} catch (e) {\n  setError(e.message); // 画面にエラーを表示\n}\n```",
   },
 
   // フォーム・ファイル
@@ -244,7 +244,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "フォーム",
     question: "画像やファイルを含むフォームデータをfetchでPOST送信したいとき",
     answer: ["FormData"],
-    supplement: "例：プロフィール画像のアップロード。\nconst fd = new FormData()\nfd.append('avatar', file)\nfetch('/upload', { method: 'POST', body: fd })\nContent-Type は自動で multipart/form-data になるので自分で指定しなくてよい。",
+    supplement: "例：FormData を使うと、テキストと画像ファイルを一緒に送れる。\nContent-Type は自動で multipart/form-data（テキストとファイルを混在させるためのフォーマット）になるので、自分で指定しなくてよい。\n\n【実務例】\nプロフィール画像をアップロードする。\n```js\nconst fd = new FormData();\nfd.append('avatar', fileInput.files[0]); // ファイルを追加\nfd.append('userId', '42');               // テキストも一緒に送れる\n\nawait fetch('/api/upload', {\n  method: 'POST',\n  body: fd,\n  // Content-Type は自動で設定されるので書かない\n});\n```",
   },
   {
     id: "w-30",
@@ -252,7 +252,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "フォーム",
     question: "ユーザーがファイルを選択した時にその内容をブラウザ上で読み取りたいとき",
     answer: ["FileReader"],
-    supplement: "例：画像選択後に即プレビューを表示する。\nconst reader = new FileReader()\nreader.onload = (e) => setPreview(e.target.result)\nreader.readAsDataURL(file)\n画像選択後に即プレビューを表示する機能でよく使われる。",
+    supplement: "例：ユーザーが選択したファイルをブラウザ上で読み取れる。サーバーに送らずにプレビューできるのがポイント。\n読み取り完了は非同期で onload イベントとして通知される。\n\n【実務例】\n画像ファイルを選択した直後に、アップロード前のプレビューを表示する。\n```js\nfileInput.addEventListener('change', () => {\n  const file = fileInput.files[0];\n  const reader = new FileReader();\n  reader.onload = (e) => {\n    previewImg.src = e.target.result; // Data URL として画像を表示\n  };\n  reader.readAsDataURL(file);\n});\n```",
   },
 
   // パフォーマンス
@@ -262,7 +262,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "入力イベントなど頻繁に発火する処理を、最後の実行から一定時間後に1回だけ実行したいとき",
     answer: ["debounce"],
-    supplement: "例：検索ボックスへの入力のたびにAPIを叩くと負荷がかかるため、入力が止まってから300ms後に1回だけ実行するようにする。\nsetTimeout + clearTimeout の組み合わせで自前実装するか、lodash の debounce を使う。",
+    supplement: "「入力が止まってから実行する」イメージ。タイピング中は何度でも後ろにズラし続けて、止まってから初めて実行する（デバウンス）。\nsetTimeout + clearTimeout の組み合わせで自前実装するか、lodash の debounce を使う。\n\n【実務例】\n検索ボックスへの入力のたびにAPIを叩くと負荷がかかるため、入力が止まってから300ms後に1回だけ実行する。\n```js\nfunction debounce(fn, delay) {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer); // 直前のタイマーをリセット\n    timer = setTimeout(() => fn(...args), delay);\n  };\n}\n\nconst search = debounce((keyword) => {\n  fetchResults(keyword);\n}, 300);\n\nsearchInput.addEventListener('input', (e) => search(e.target.value));\n```",
   },
   {
     id: "w-32",
@@ -270,7 +270,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "スクロールやリサイズなど頻繁なイベントを、一定間隔で間引いて実行したいとき",
     answer: ["throttle"],
-    supplement: "例：スクロール位置に応じてヘッダーの表示を切り替える処理を、100ms ごとに1回だけ実行するようにする。\ndebounce は「止まった後に1回」だが throttle は「一定間隔で必ず実行」する点が違う。\n途中経過が必要な場面に向いている。",
+    supplement: "「一定間隔で必ず実行する」イメージ（スロットル）。debounce は「止まった後に1回」実行するが、throttle は「何度発生しても100msに1回まで」という制限をかける。途中経過が必要な場面（スクロール位置の追跡など）に向いている。\n\n【実務例】\nスクロール位置に応じてヘッダーの表示を切り替える処理を、100msごとに1回だけ実行する。\n```js\nfunction throttle(fn, interval) {\n  let lastTime = 0;\n  return (...args) => {\n    const now = Date.now();\n    if (now - lastTime >= interval) {\n      lastTime = now;\n      fn(...args);\n    }\n  };\n}\n\nwindow.addEventListener('scroll', throttle(() => {\n  const isScrolled = window.scrollY > 50;\n  header.classList.toggle('scrolled', isScrolled);\n}, 100));\n```",
   },
   {
     id: "w-33",
@@ -278,7 +278,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "パフォーマンス",
     question: "ブラウザの描画タイミングに合わせてアニメーションを実行したいとき",
     answer: ["requestAnimationFrame"],
-    supplement: "例：\nconst animate = () => {\n  el.style.left = x + 'px'\n  x++\n  requestAnimationFrame(animate)\n}\nsetInterval より滑らかで、タブが非アクティブなときは自動で止まるので無駄な処理が走らない。",
+    supplement: "例：ブラウザが次の画面を描画する直前に処理を実行してくれる（通常1秒に60回）。setInterval より滑らかで、タブが非アクティブなときは自動で止まるので無駄な処理が走らない。\n\n【実務例】\n要素をなめらかに横移動させるアニメーション。\n```js\nlet x = 0;\nfunction animate() {\n  x += 2;\n  el.style.left = x + 'px';\n  if (x < 300) {\n    requestAnimationFrame(animate); // 次の描画タイミングで再度呼ぶ\n  }\n}\nrequestAnimationFrame(animate);\n```",
   },
 
   // セキュリティ
@@ -288,7 +288,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "セキュリティ",
     question: "ユーザー入力をそのままinnerHTMLに入れると発生するセキュリティリスクは何？",
     answer: ["XSS", "クロスサイトスクリプティング"],
-    supplement: "例：el.innerHTML = userInput で悪意あるスクリプトが実行されてしまう。\n対策はユーザー入力の表示に textContent を使うこと。\nどうしても HTML を挿入する場合は DOMPurify などでサニタイズ（無害化）してから使う。",
+    supplement: "el.innerHTML = userInput のように、ユーザーが入力した値をそのまま HTML として埋め込むと、悪意あるスクリプトが実行されてしまう（XSS＝クロスサイトスクリプティング）。\n\n対策はユーザー入力の表示に textContent を使うこと（タグを文字として表示するのでスクリプトが実行されない）。どうしても HTML を挿入する場合は DOMPurify などのライブラリでサニタイズ（無害化）してから使う。\n\n【NG例と対策】\n```js\n// NG: 悪意あるスクリプトが実行される可能性がある\nel.innerHTML = userInput;\n\n// OK: タグを文字として表示するので安全\nel.textContent = userInput;\n```",
   },
   {
     id: "w-35",
@@ -296,7 +296,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "セキュリティ",
     question: "別オリジンのAPIにfetchするとブラウザに弾かれることがある。この仕組みの名前は？",
     answer: ["CORS", "オリジン間リソース共有"],
-    supplement: "例：localhost:3000 のフロントから api.example.com にリクエストすると CORS エラーになる場合がある。\n解決はサーバー側で Access-Control-Allow-Origin ヘッダーを設定すること。\nフロントエンドだけでは対処できないのでバックエンド担当者に依頼が必要。",
+    supplement: "ブラウザには「別のオリジン（ドメイン・ポート・プロトコルの組み合わせ）へのリクエストは制限する」というセキュリティルールがある（CORS＝Cross-Origin Resource Sharing）。\n\n解決するにはサーバー側で「このオリジンからのリクエストは許可する」という設定（Access-Control-Allow-Origin ヘッダー）をする必要があり、フロントエンドだけでは対処できない。\n\n【実務例】\n```js\n// localhost:3000 のフロントから api.example.com に fetch → CORSエラー\nfetch('https://api.example.com/data');\n// → サーバー側に Access-Control-Allow-Origin の設定が必要\n```",
   },
 
   // モダンAPI
@@ -306,7 +306,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "通信",
     question: "サーバーからリアルタイムにデータをストリームで受け取りたいとき（チャットやログなど）",
     answer: ["EventSource"],
-    supplement: "例：サーバーからのプッシュ通知を受け取る。\nconst es = new EventSource('/notifications')\nes.onmessage = (e) => addNotification(e.data)\nWebSocket より実装がシンプルで、サーバー→クライアントの一方向通信に向いている。",
+    supplement: "例：サーバー→クライアントの一方向通信に特化した仕組み（SSE＝Server-Sent Events）。\nWebSocket より実装がシンプルで、「サーバーから一方的にデータを送り続けたい」場面に向いている。\n\n【実務例】\nサーバーからリアルタイム通知を受け取る。\n```js\nconst es = new EventSource('/api/notifications');\nes.onmessage = (e) => {\n  addNotification(JSON.parse(e.data));\n};\nes.onerror = () => {\n  console.error('接続が切れました');\n  es.close();\n};\n```",
   },
   {
     id: "w-37",
@@ -314,7 +314,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ストレージ",
     question: "localStorageより大容量で、オブジェクトやBlobもそのまま保存できるブラウザ内DBは？",
     answer: ["IndexedDB"],
-    supplement: "例：オフライン対応アプリで、ネット接続がないときのデータを IndexedDB に保存しておき、接続が回復したらサーバーに同期するといった使い方ができる。\n直接扱うのは複雑なため idb などのラッパーライブラリを使うのが一般的。",
+    supplement: "localStorage は文字列しか保存できず容量も5MB程度だが、IndexedDB はオブジェクトや画像データ（Blob）もそのまま保存でき、容量も大きい（ブラウザ内のデータベース）。\n直接扱うのは複雑なため、idb などのラッパーライブラリを使うのが一般的。\n\n【実務例】\nオフライン対応アプリで、ネット接続がないときのデータを保存しておき、接続が回復したらサーバーと同期する。\n```js\nimport { openDB } from 'idb'; // ラッパーライブラリを使う\n\nconst db = await openDB('myApp', 1, {\n  upgrade(db) {\n    db.createObjectStore('drafts', { keyPath: 'id' });\n  },\n});\n\n// 保存\nawait db.put('drafts', { id: 1, content: '下書きの内容' });\n// 取得\nconst draft = await db.get('drafts', 1);\n```",
   },
   {
     id: "w-38",
@@ -322,6 +322,6 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "DOM要素の追加・削除・属性変更を監視したいとき",
     answer: ["MutationObserver"],
-    supplement: "例：新しいメッセージが追加されたら自動スクロールする。\nnew MutationObserver(callback).observe(target, { childList: true })\nサードパーティのウィジェットが DOM を書き換えた後に独自処理を実行したい場合にも使われる。",
+    supplement: "例：DOM（画面の要素）に変化があったときに自動で処理を実行できる。\nポーリング（定期的に状態を確認し続ける方法）より効率がよい。\n\n【実務例】\nチャットなど、新しいメッセージが追加されたら自動でスクロールする。\n```js\nconst observer = new MutationObserver(() => {\n  chatBox.scrollTop = chatBox.scrollHeight; // 最下部にスクロール\n});\nobserver.observe(chatBox, { childList: true }); // 子要素の追加・削除を監視\n```",
   },
 ];
