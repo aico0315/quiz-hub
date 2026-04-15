@@ -65,7 +65,11 @@ export default function App() {
       .filter(Boolean) as LogicQuestion[];
   });
 
-  const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved === "dark"; // 手動で設定済みならそれを優先
+    return window.matchMedia("(prefers-color-scheme: dark)").matches; // 未設定ならデバイス設定に従う
+  });
 
   // ダークモード
   useEffect(() => {
