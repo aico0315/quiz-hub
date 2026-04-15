@@ -29,7 +29,6 @@ const quizTypes: { type: QuizType; icon: string; title: string; description: str
 export default function DashboardScreen({ onSelect }: Props) {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Quiz Hub</h1>
       <p className={styles.subtitle}>問題タイプを選んでください</p>
       <div className={styles.cards}>
         {quizTypes.map(({ type, icon, title, description }) => (
