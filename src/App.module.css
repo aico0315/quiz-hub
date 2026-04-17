@@ -55,7 +55,7 @@
 
 .themeToggle.darkMode {
   background: #3730a3;
-  border: 1.5px solid #4338ca;
+  outline: 1.5px solid #4338ca;
 }
 
 .knob {
