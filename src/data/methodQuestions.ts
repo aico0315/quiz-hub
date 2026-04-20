@@ -104,7 +104,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "配列メソッド",
     question: "配列の一部を取り出して新しい配列を作りたいとき",
     answer: ["slice"],
-    supplement: "arr.slice(1, 3) のように使う。開始インデックスから終了インデックスの手前まで取り出す（終了インデックスの要素は含まれない）。元の配列はそのまま残る（非破壊メソッド）。\n\n【実務例】\nブログのトップページに、最新記事を3件だけ表示する。\n```js\nconst articles = [記事1, 記事2, 記事3, 記事4, 記事5];\nconst latest = articles.slice(0, 3);\n// [記事1, 記事2, 記事3]\n```\nページネーションで、現在のページ分だけ取り出す。\n```js\nconst page = 2;\nconst perPage = 10;\nconst current = items.slice((page - 1) * perPage, page * perPage);\n```",
+    supplement: "arr.slice(1, 3) のように使う。開始インデックスから終了インデックスの手前まで取り出す（終了インデックスの要素は含まれない）。元の配列はそのまま残る（非破壊メソッド）。\n\n【実務例】\nブログのトップページに、最新記事を3件だけ表示する。\n```js\nconst articles = [記事1, 記事2, 記事3, 記事4, 記事5];\nconst latest = articles.slice(0, 3);\n// [記事1, 記事2, 記事3]\n```\nページネーションで、現在のページ分だけ取り出す。1ページあたり10件表示、2ページ目を表示したい場合は10件目〜19件目（インデックス10〜19）を取り出す。\n```js\nconst allItems = ['商品A', '商品B', '商品C', /* ...全100件 */];\nconst page = 2;      // 表示したいページ番号\nconst perPage = 10;  // 1ページあたりの件数\n\nconst start = (page - 1) * perPage; // → 10\nconst end = page * perPage;         // → 20\nconst current = allItems.slice(start, end);\n// インデックス10〜19の10件が取り出される\n```",
   },
   // 文字列メソッド
   {
