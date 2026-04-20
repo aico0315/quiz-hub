@@ -174,7 +174,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "ウィンドウ",
     question: "ページの一番上までスクロールしたいとき",
     answer: ["window.scrollTo"],
-    supplement: "例：window.scrollTo({ top: 0, behavior: 'smooth' }) でスムーズにトップまでスクロールできる。\nbehavior: 'smooth' をつけるとなめらかにスクロールし、'instant' にすると即座に移動する。\n\n【実務例】\n「トップへ戻る」ボタンを実装する。\n```js\nconst topBtn = document.querySelector('.back-to-top');\ntopBtn.addEventListener('click', () => {\n  window.scrollTo({ top: 0, behavior: 'smooth' });\n});\n```",
+    supplement: "例：window.scrollTo({ top: 0, behavior: 'smooth' }) でスムーズにトップまでスクロールできる。\nbehavior: 'smooth' をつけるとなめらかにスクロールし、'instant' にすると即座に移動する。\n\n【実務例①】\n「トップへ戻る」ボタンを実装する。\n```js\nconst topBtn = document.querySelector('.back-to-top');\ntopBtn.addEventListener('click', () => {\n  window.scrollTo({ top: 0, behavior: 'smooth' });\n});\n```\n\n【実務例②】\nナビゲーションのリンクをクリックしたとき、対応するセクションまでスムーズスクロールする。\n```js\nconst link = document.querySelector('a[href=\"#about\"]');\nlink.addEventListener('click', (e) => {\n  e.preventDefault(); // aタグのデフォルトのジャンプを無効化\n  const section = document.querySelector('#about');\n  const top = section.getBoundingClientRect().top + window.scrollY;\n  // getBoundingClientRect().top → 今の画面上の位置\n  // window.scrollY → すでにスクロールした量\n  // 2つを足すとページ先頭からの距離になる\n  window.scrollTo({ top, behavior: 'smooth' });\n});\n```",
   },
   {
     id: "w-22",
