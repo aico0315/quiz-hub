@@ -24,7 +24,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "id属性で特定の要素を取得したいとき",
     answer: ["document.getElementById"],
-    supplement: "例：document.getElementById('submit-btn') で id が submit-btn の要素を取得できる。\nquerySelector('#submit-btn') と同じ結果だが、こちらの方が処理が速い。\n引数に # は不要なので注意（querySelector と違う点）。\n\n【実務例】\nフォームの送信ボタンを取得して操作する。\n```js\nconst btn = document.getElementById('submit-btn');\nbtn.disabled = true; // ボタンを押せない状態にする\n```",
+    supplement: "例：document.getElementById('submit-btn') で id が submit-btn の要素を取得できる。\nquerySelector('#submit-btn') と同じ結果だが、こちらの方が処理が速い。\n引数に # は不要なので注意（querySelector と違う点）。\n該当するIDの要素が存在しない場合は null が返るので、操作する前に if で確認するのが安全（nullチェック）。\n\n【実務例】\nフォームの送信ボタンを取得して操作する。\n```js\nconst btn = document.getElementById('submit-btn');\nif (btn) {\n  btn.disabled = true; // ボタンを押せない状態にする\n}\n// if がないと、btnがnullのとき「Cannot set properties of null」エラーになる\n```",
   },
   {
     id: "w-4",
