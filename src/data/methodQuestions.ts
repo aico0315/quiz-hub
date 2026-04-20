@@ -145,7 +145,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "文字列メソッド",
     question: "文字列に特定の文字列が含まれているか確認したいとき",
     answer: ["includes"],
-    supplement: "'hello world'.includes('world') → true のように使う。含まれていれば true、含まれていなければ false が返ってくる（真偽値を返すメソッド）。大文字と小文字は区別される。\n\n【実務例】\n検索ボックスに入力したキーワードが商品名に含まれているかで、表示リストを絞り込む。\n```js\nconst keyword = searchInput.toLowerCase();\nconst filtered = products.filter(p =>\n  p.name.toLowerCase().includes(keyword)\n);\n```",
+    supplement: "'hello world'.includes('world') → true のように使う。含まれていれば true、含まれていなければ false が返ってくる（真偽値を返すメソッド）。大文字と小文字は区別される。\n\n【実務例①：シンプルな使い方】\n通信エラーのメッセージに 'network' という文字が含まれているか確認して、専用のエラー画面を出す。\n```js\nconst message = 'network error occurred';\nif (message.includes('network')) {\n  showNetworkError();\n}\n```\n\n【実務例②：よく使う応用パターン】\n検索ボックスのキーワードが商品名に含まれているかで表示リストを絞り込む。大文字小文字を区別しないよう、両方を toLowerCase() で小文字に揃えてから比べる。\n```js\nconst keyword = searchInput.toLowerCase();\nconst filtered = products.filter(p =>\n  p.name.toLowerCase().includes(keyword)\n);\n```",
   },
   {
     id: "m-19",
