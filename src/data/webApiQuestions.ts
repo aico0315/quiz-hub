@@ -16,7 +16,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "DOM操作",
     question: "CSSセレクターにマッチする全ての要素を取得したいとき",
     answer: ["document.querySelectorAll"],
-    supplement: "例：document.querySelectorAll('li') でリストアイテムを全件取得できる。\n返り値は NodeList（配列に似たリスト）なので forEach で回せる。ただし map や filter は使えないので、配列に変換したい場合は [...list] とスプレッド構文を使う。\n\n【実務例】\n全てのカードにクリックイベントを一括登録する。\n```js\nconst cards = document.querySelectorAll('.card');\ncards.forEach(card => {\n  card.addEventListener('click', handleCardClick);\n});\n```",
+    supplement: "例：document.querySelectorAll('li') でリストアイテムを全件取得できる。\n取得した結果は「要素のリスト（NodeList）」として返ってくる。forEach でひとつずつ処理できるが、map や filter は使えない。map や filter を使いたいときはスプレッド構文 [...list] で普通の配列に変換してから使う。\n\n【実務例①】\n全てのカードにクリックイベントを一括登録する。\n```js\nconst cards = document.querySelectorAll('.card');\ncards.forEach(card => {\n  card.addEventListener('click', handleCardClick);\n});\n```\n\n【実務例②】\nmap や filter を使いたい場合はスプレッド構文で配列に変換する。\n```js\nconst items = document.querySelectorAll('.item');\nconst texts = [...items].map(item => item.textContent);\n// ['テキスト1', 'テキスト2', 'テキスト3', ...]\n```",
   },
   {
     id: "w-3",
