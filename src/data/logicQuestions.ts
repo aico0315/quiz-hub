@@ -11,7 +11,7 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: "[3500,5000]",
-    explanation: "「条件に合う要素だけ取り出す」には `filter` を使います。\n\n```js\nconst result = prices.filter(p => p >= 3000);\nconsole.log(result);\n```\n\n`filter` に渡した関数が `true` を返した要素だけが、新しい配列に残ります。元の `prices` 配列はそのまま残ります（非破壊メソッド）。\n\nmap と混同しやすいポイント：\n- **filter** → 要素を「絞り込む」（数が減る）\n- **map** → 要素を「変換する」（数は変わらない）",
+    explanation: "「条件に合う要素だけ取り出す」には `filter` を使います。\n\n```js\nconst result = prices.filter(p => p >= 3000);\nconsole.log(result);\n```\n\n`filter` に渡した関数が `true` を返した要素だけが、新しい配列に残ります。元の `prices` 配列はそのまま残ります（非破壊メソッド）。\n\nmap と混同しやすいポイント：\n- filter → 要素を「絞り込む」（数が減る）\n- map → 要素を「変換する」（数は変わらない）",
   },
   {
     id: "l-2",
@@ -35,7 +35,7 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: "[12000,34000,45000,67000,89000]",
-    explanation: "配列の並び替えには `sort` を使います。数値を正しく並び替えるには、比較関数を渡す必要があります。\n\n```js\nconst result = sales.sort((a, b) => a - b);\nconsole.log(result);\n```\n\n**なぜ比較関数が必要？**\n引数なしの `sort()` は数値を文字列として並べるため、`[12000, 34000, 45000, 67000, 89000]` ではなく `[12000, 34000, 45000, 67000, 89000]`…と字面で比べてしまい意図しない順番になることがあります。`(a, b) => a - b` と渡すと数値として正しく比較されます。\n\n⚠️ `sort()` は元の配列を直接書き換えます（破壊メソッド）。元のデータを残したい場合は、先にコピーしてから並び替えるのが安全です。\n\n```js\nconst result = [...sales].sort((a, b) => a - b);\n```",
+    explanation: "配列の並び替えには `sort` を使います。数値を正しく並び替えるには、比較関数を渡す必要があります。\n\n```js\nconst result = sales.sort((a, b) => a - b);\nconsole.log(result);\n```\n\nなぜ比較関数が必要？\n引数なしの `sort()` は数値を文字列として並べるため、`[12000, 34000, 45000, 67000, 89000]` ではなく `[12000, 34000, 45000, 67000, 89000]`…と字面で比べてしまい意図しない順番になることがあります。`(a, b) => a - b` と渡すと数値として正しく比較されます。\n\n⚠️ `sort()` は元の配列を直接書き換えます（破壊メソッド）。元のデータを残したい場合は、先にコピーしてから並び替えるのが安全です。\n\n```js\nconst result = [...sales].sort((a, b) => a - b);\n```",
   },
   {
     id: "l-4",
@@ -111,7 +111,7 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: '["id","name","email","role"]',
-    explanation: "オブジェクトのキー（プロパティ名）一覧を配列で取得するには `Object.keys` を使います。\n\n```js\nconst result = Object.keys(user);\nconsole.log(result);\n```\n\n**なぜこれが便利？**\nキーが分かれば `forEach` や `map` でループしてフォームの入力欄を自動生成できます。フィールドが増えても手動で追加する必要がなくなります。\n\nセットで覚えたいメソッド：\n- `Object.keys(obj)` → キーの配列\n- `Object.values(obj)` → 値の配列\n- `Object.entries(obj)` → [キー, 値] のペアの配列",
+    explanation: "オブジェクトのキー（プロパティ名）一覧を配列で取得するには `Object.keys` を使います。\n\n```js\nconst result = Object.keys(user);\nconsole.log(result);\n```\n\nなぜこれが便利？\nキーが分かれば `forEach` や `map` でループしてフォームの入力欄を自動生成できます。フィールドが増えても手動で追加する必要がなくなります。\n\nセットで覚えたいメソッド：\n- `Object.keys(obj)` → キーの配列\n- `Object.values(obj)` → 値の配列\n- `Object.entries(obj)` → [キー, 値] のペアの配列",
   },
   {
     id: "l-10",
@@ -173,6 +173,6 @@ export const logicQuestions: LogicQuestion[] = [
 // ここにコードを書く
 `,
     expected: '"ワイヤレスイヤホン"',
-    explanation: "`async/await` を使うと、非同期処理（時間のかかる処理）の結果を「待ってから」次の行を実行できます。\n\n```js\nasync function main() {\n  const product = await fetchProduct();\n  console.log(product.name);\n}\nmain();\n```\n\n**なぜ async/await が必要？**\n`fetchProduct()` は結果がすぐ返ってこず、500ms後に返ってくる非同期処理です。`await` なしで呼ぶと、結果が届く前に次の行が実行されてしまいます。\n\n`async` をつけた関数の中でだけ `await` が使えます。実際のAPI呼び出しもこの同じパターンで書きます。\n\n⚠️ 実務では `try/catch` でエラー処理をセットで書くのが基本です。APIが失敗したときに何もしないと、アプリが止まったりユーザーに何も表示されなくなります。\n\n```js\nasync function main() {\n  try {\n    const product = await fetchProduct();\n    console.log(product.name);\n  } catch (error) {\n    console.error('取得に失敗しました:', error);\n  }\n}\nmain();\n```",
+    explanation: "`async/await` を使うと、非同期処理（時間のかかる処理）の結果を「待ってから」次の行を実行できます。\n\n```js\nasync function main() {\n  const product = await fetchProduct();\n  console.log(product.name);\n}\nmain();\n```\n\nなぜ async/await が必要？\n`fetchProduct()` は結果がすぐ返ってこず、500ms後に返ってくる非同期処理です。`await` なしで呼ぶと、結果が届く前に次の行が実行されてしまいます。\n\n`async` をつけた関数の中でだけ `await` が使えます。実際のAPI呼び出しもこの同じパターンで書きます。\n\n⚠️ 実務では `try/catch` でエラー処理をセットで書くのが基本です。APIが失敗したときに何もしないと、アプリが止まったりユーザーに何も表示されなくなります。\n\n```js\nasync function main() {\n  try {\n    const product = await fetchProduct();\n    console.log(product.name);\n  } catch (error) {\n    console.error('取得に失敗しました:', error);\n  }\n}\nmain();\n```",
   },
 ];
