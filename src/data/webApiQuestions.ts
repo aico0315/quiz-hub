@@ -114,7 +114,7 @@ export const webApiQuestions: MethodQuestion[] = [
     category: "Web Storage",
     question: "localStorageからJSON形式のデータを読み込みたいとき",
     answer: ["JSON.parse"],
-    supplement: "例：localStorage は文字列しか保存できないため、オブジェクトや配列は保存時に JSON.stringify()（オブジェクト→文字列）、取り出し時に JSON.parse()（文字列→オブジェクト）がセットになる。\n\n【実務例】\nカート情報（オブジェクトの配列）を保存・取り出しする。\n```js\n// 保存：オブジェクトを文字列に変換してから保存\nconst cart = [{ id: 1, name: 'Tシャツ', qty: 2 }];\nlocalStorage.setItem('cart', JSON.stringify(cart));\n\n// 取り出し：文字列をオブジェクトに戻す\nconst saved = JSON.parse(localStorage.getItem('cart'));\n```",
+    supplement: "例：localStorage は文字列しか保存できないため、オブジェクトや配列は保存時に JSON.stringify()（オブジェクト→文字列）、取り出し時に JSON.parse()（文字列→オブジェクト）がセットになる。\n\n【実務例】\nカート情報（オブジェクトの配列）を保存・取り出しする。\n```js\n// 保存：オブジェクトを文字列に変換してから保存\nconst cart = [{ id: 1, name: 'Tシャツ', qty: 2 }];\nlocalStorage.setItem('cart', JSON.stringify(cart));\n\n// 取り出し：文字列をオブジェクトに戻す\n// || '[]' は「データがまだ保存されていない場合は空配列として扱う」という意味\nconst saved = JSON.parse(localStorage.getItem('cart') || '[]');\n```\n\n⚠️ || '[]' を省略すると、データが保存されていないときに getItem が null を返し、そのまま forEach などを使おうとするとエラーになる。",
   },
   // 通信
   {
