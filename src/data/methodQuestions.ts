@@ -227,7 +227,7 @@ export const methodQuestions: MethodQuestion[] = [
     category: "Objectメソッド",
     question: "複数のオブジェクトを1つにまとめたいとき",
     answer: ["Object.assign"],
-    supplement: "Object.assign({}, obj1, obj2) のように使う。後から渡したオブジェクトのキーが優先されるので、「デフォルト設定に上書きで追加する」イメージ（マージ）。スプレッド構文 {...obj1, ...obj2} でも同じことができ、最近のコードはこちらが主流。\n\n【実務例】\nアプリのデフォルト設定に、ユーザーが変更した設定だけ上書きでマージする。\n```js\nconst defaults = { theme: 'light', lang: 'ja', notifications: true };\nconst userSettings = { theme: 'dark' };\nconst settings = { ...defaults, ...userSettings };\n// { theme: 'dark', lang: 'ja', notifications: true }\n// theme だけ上書きされ、他はデフォルトのまま\n```",
+    supplement: "Object.assign({}, obj1, obj2) のように使う。後から渡したオブジェクトのキーが優先されるので、「デフォルト設定に上書きで追加する」イメージ（マージ）。スプレッド構文 {...obj1, ...obj2} でも同じことができ、最近のコードはこちらが主流。\n\n【実務例】\nアプリのデフォルト設定に、ユーザーが変更した設定だけ上書きでマージする。\n```js\nconst defaults = { theme: 'light', lang: 'ja', notifications: true };\nconst userSettings = { theme: 'dark' };\n\n// Object.assign を使う書き方（第1引数の {} は元のオブジェクトを書き換えないためのコピー先）\nconst settings1 = Object.assign({}, defaults, userSettings);\n// { theme: 'dark', lang: 'ja', notifications: true }\n\n// 最近はスプレッド構文が主流（同じ結果になる）\nconst settings2 = { ...defaults, ...userSettings };\n// { theme: 'dark', lang: 'ja', notifications: true }\n\n// どちらも後から書いた方（userSettings）のキーが優先される\n// → theme だけ 'dark' に上書きされ、他はデフォルトのまま\n```",
   },
   {
     id: "m-29",
