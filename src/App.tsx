@@ -74,7 +74,6 @@ export default function App() {
   // ダークモード
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
 
   // クイズ中のセッションを保存
@@ -149,7 +148,11 @@ export default function App() {
         </button>
         <button
           className={`${styles.themeToggle} ${isDark ? styles.darkMode : ""}`}
-          onClick={() => setIsDark((d) => !d)}
+          onClick={() => setIsDark((d) => {
+            const next = !d;
+            localStorage.setItem("theme", next ? "dark" : "light");
+            return next;
+          })}
           aria-label={isDark ? "ライトモードに切り替え" : "ダークモードに切り替え"}
         >
           <svg className={styles.sunIcon} width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
